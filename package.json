@@ -32,6 +32,7 @@
     "webpack-dev-server": "^4.8.1"
   },
   "dependencies": {
+    "bootstrap-icons": "^1.8.3",
     "clean-webpack-plugin": "^4.0.0",
     "webpack-merge": "^5.8.0"
   }

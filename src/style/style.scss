@@ -1,9 +1,141 @@
+@import "bootstrap-icons/font/bootstrap-icons.css";
 @import '~normalize.css/normalize';
 @import ' ~rfs/scss';
 @import './constants';
+
+@font-face {
+  font-family: 'Kirvy Thin';
+  src: url('../assets/fonts/kirvy/Kirvy-Thin.otf');
+}
+@font-face {
+  font-family: 'Kirvy Light';
+  src: url('../assets/fonts/kirvy/Kirvy-Light.otf');
+}
+@font-face {
+  font-family: 'Kirvy Regular';
+  src: url('../assets/fonts/kirvy/Kirvy-Regular.otf');
+}
+@font-face {
+  font-family: 'Kirvy Bold';
+  src: url('../assets/fonts/kirvy/Kirvy-Bold.otf');
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: Kirvy Thin;
+  font-weight: 900;
+  justify-content: space-between;
+  color: $primary-font-color;
+}
+
+body {
+  background: $background-color;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+header {
+  width: 100%;
+  padding: 3rem 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  a, i {
+    color: $secondary-font-color;
+      font-family: Kirvy Bold;
+      font-weight: 900;
+      font-size: 1.3rem;
+      text-decoration: none;
+  }
+  nav {
+    margin-left: auto;
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      button {
+        border: none;
+        background: none;
+        color: $secondary-font-color;
+        font-family: Kirvy Bold;
+        font-weight: 900;
+        font-size: 1rem;
+        padding: 0;
+      }
+    }
+  }
+}
+
+.home {
+  width: 100%;
+  padding: 0 7rem;
+  display: flex;
+  justify-content: space-between;
+  .greeting {
+    display: flex;
+    flex-direction: column;
+    // .name {
+      // display: flex;
+    // }  
+    h1 {
+      font-size: $name-title-size;
+      margin: 0;
+    }
+    h2 {
+      font-family: Kirvy Light;
+      color: $secondary-font-color;
+      font-size: 2rem;
+      // text-align: center;
+    }
+    .cernik {
+      color: $primary-accent-color;
+      font-family: Kirvy Bold;
+    }
+  }
+  .profile {
+    transform: rotate(-5deg);
+    position: relative;
+    img {
+      height: $profile-pic-size;
+      width: auto;
+    }
+    &::before {
+      content: '';
+      top: -$profile-pic-outline-offset;
+      left: -$profile-pic-outline-offset;
+      position: absolute;
+      width: $profile-pic-size;
+      height: $profile-pic-size;
+      outline: $profile-pic-outline-width solid $primary-accent-color;
+      z-index: -1;
+    }
+    &::after {
+      content: '';
+      top: $profile-pic-outline-offset;
+      left: $profile-pic-outline-offset;
+      position: absolute;
+      width: $profile-pic-size * $profile-pic-outline-scale;
+      height: $profile-pic-size * $profile-pic-outline-scale;
+      outline: $profile-pic-outline-width solid $primary-font-color;
+    }
+  }
+}
+
+.bi-arrow-down {
+  font-size: 2rem;
+  margin: 0 auto;
+  padding: 3rem;
+}
+
+.home, .bi-arrow-down {
+  display: none;
 }
