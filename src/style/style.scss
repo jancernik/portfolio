@@ -1,23 +1,28 @@
-@import "bootstrap-icons/font/bootstrap-icons.css";
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 @import '~normalize.css/normalize';
 @import ' ~rfs/scss';
 @import './constants';
 
 @font-face {
   font-family: 'Kirvy Thin';
-  src: url('../assets/fonts/kirvy/Kirvy-Thin.otf');
+  src: url('../assets/fonts/Kirvy/Kirvy-Thin.otf');
 }
 @font-face {
   font-family: 'Kirvy Light';
-  src: url('../assets/fonts/kirvy/Kirvy-Light.otf');
+  src: url('../assets/fonts/Kirvy/Kirvy-Light.otf');
 }
 @font-face {
   font-family: 'Kirvy Regular';
-  src: url('../assets/fonts/kirvy/Kirvy-Regular.otf');
+  src: url('../assets/fonts/Kirvy/Kirvy-Regular.otf');
 }
 @font-face {
   font-family: 'Kirvy Bold';
-  src: url('../assets/fonts/kirvy/Kirvy-Bold.otf');
+  src: url('../assets/fonts/Kirvy/Kirvy-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('../assets/fonts/Roboto/RobotoMono-Variable.ttf');
 }
 
 * {
@@ -28,33 +33,31 @@
 
 html,
 body {
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   font-family: Kirvy Thin;
   font-weight: 900;
-  justify-content: space-between;
   color: $primary-font-color;
-}
-
-body {
   background: $background-color;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  scroll-behavior: smooth;
+  -webkit-scroll-behavior: smooth;
 }
-
 
 header {
+  position: fixed;
+  top: 0;
   width: 100%;
-  padding: 3rem 3rem;
+  padding: 2rem 3rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  a, i {
+  a,
+  i {
     color: $secondary-font-color;
-      font-family: Kirvy Bold;
-      font-weight: 900;
-      font-size: 1.3rem;
-      text-decoration: none;
+    font-family: Kirvy Bold;
+    font-weight: 900;
+    font-size: 1.3rem;
+    text-decoration: none;
   }
   nav {
     margin-left: auto;
@@ -75,31 +78,68 @@ header {
   }
 }
 
-.home {
+.container {
   width: 100%;
-  padding: 0 7rem;
+  height: 100%;
+}
+
+section {
+  width: 100vw;
+  height: 100vh;
   display: flex;
+  padding: 0 7rem;
+}
+
+.home {
   justify-content: space-between;
-  .greeting {
+  align-items: center;
+  .title {
     display: flex;
     flex-direction: column;
-    // .name {
-      // display: flex;
-    // }  
     h1 {
       font-size: $name-title-size;
       margin: 0;
+    }
+    h1:nth-of-type(2) {
+      color: $primary-accent-color;
+      font-family: Kirvy Bold;
     }
     h2 {
       font-family: Kirvy Light;
       color: $secondary-font-color;
       font-size: 2rem;
-      // text-align: center;
+      margin: 1rem 0 0 1.4rem;
     }
-    .cernik {
-      color: $primary-accent-color;
-      font-family: Kirvy Bold;
-    }
+  }
+  object {
+    transform: translate(4rem, 3rem);
+    height: 34rem;
+    width: auto;
+  }
+}
+
+.bi-arrow-down {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  display: none;
+}
+
+.about {
+  font-family: Roboto Mono;
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4rem;
+  .p {
+    color: $primary-accent-color;
+    font-weight: 600;
+    display: flex;
+    padding: 0.5rem 0;
   }
   .profile {
     transform: rotate(-5deg);
@@ -130,12 +170,119 @@ header {
   }
 }
 
-.bi-arrow-down {
-  font-size: 2rem;
-  margin: 0 auto;
-  padding: 3rem;
+.projects {
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  gap: 4rem;
+  .project-grid {
+    padding: $projects-grid-spacing-bp3 $projects-grid-peek-bp3;
+    scroll-padding-inline: $projects-grid-peek-bp3;
+    scroll-snap-type: inline mandatory;
+    display: grid;
+    grid-auto-flow: column;
+    gap: $projects-grid-spacing-bp3;
+    grid-auto-columns: calc(
+      (100% / $n-projects-visible-bp3) -
+        (
+          ($projects-grid-spacing-bp3 * ($n-projects-visible-bp3 - 1)) /
+            ($n-projects-visible-bp3)
+        )
+    );
+    overflow: auto;
+    overscroll-behavior-inline: contain;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .project-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      scroll-snap-align: start;
+      img {
+        max-width: 100%;
+        border-radius: 1.2rem;
+      }
+      h3,
+      p {
+        margin-inline: 1rem;
+      }
+      h3 {
+        font-family: Kirvy Bold;
+        font-size: 1.4rem;
+        color: $primary-accent-color;
+      }
+      p {
+        font-family: Kirvy Light;
+        font-size: 1.06rem;
+      }
+    }
+  }
+  .technologies {
+    display: flex;
+    display: none;
+    justify-content: center;
+    gap: 0.5rem;
+    i {
+      font-size: 1.4rem;
+    }
+    div {
+      font-family: Kirvy Light;
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding-inline: 1rem;
+      color: transparent;
+      i {
+        color: $primary-font-color;
+      }
+      &:hover {
+        color: $primary-accent-color;
+      }
+    }
+  }
 }
 
-.home, .bi-arrow-down {
-  display: none;
+@media (max-width: 900px) {
+  .projects {
+    .project-grid {
+      padding: $projects-grid-spacing-bp2 $projects-grid-peek-bp2;
+      scroll-padding-inline: $projects-grid-peek-bp2;
+      gap: $projects-grid-spacing-bp2;
+      grid-auto-columns: calc(
+        (100% / $n-projects-visible-bp2) -
+          (
+            ($projects-grid-spacing-bp2 * ($n-projects-visible-bp2 - 1)) /
+              ($n-projects-visible-bp2)
+          )
+      );
+    }
+  }
+  section {
+    padding: 0 3rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .projects {
+    .project-grid {
+      padding: $projects-grid-spacing-bp1 $projects-grid-peek-bp1;
+      scroll-padding-inline: $projects-grid-peek-bp1;
+      gap: $projects-grid-spacing-bp1;
+      grid-auto-columns: calc(
+        (100% / $n-projects-visible-bp1) -
+          (
+            ($projects-grid-spacing-bp1 * ($n-projects-visible-bp1 - 1)) /
+              ($n-projects-visible-bp1)
+          )
+      );
+    }
+  }
+  section {
+    padding: 0;
+  }
 }
