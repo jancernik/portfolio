@@ -358,11 +358,12 @@ section {
   }
   section {
     padding: $bp2-section-padding;
+    padding-top: 0;
   }
   #home {
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: 8rem;
+    // padding-top: 8rem;
     overflow-x: hidden;
 
     .title {
