@@ -66,7 +66,7 @@ header {
     text-decoration: none;
   }
   a {
-    display:none;
+    display: none;
   }
   nav {
     margin-left: auto;
@@ -102,9 +102,9 @@ section {
   width: 100vw;
   height: calc(100vh - calc(100vh - 100%));
   padding: $section-padding;
-} 
+}
 
-@supports ( -moz-appearance:none ){
+@supports (-moz-appearance: none) {
   section:last-of-type {
     height: calc(100vh + calc(100vh - 100%));
   }
@@ -279,9 +279,11 @@ section {
   form {
     display: flex;
     flex-direction: column;
-   width: 80%;
+    width: 80%;
   }
-  input[type=text],input[type=email], textarea {
+  input[type='text'],
+  input[type='email'],
+  textarea {
     width: 100%;
     padding: 0.6rem;
     border: none;
@@ -289,8 +291,8 @@ section {
     margin-bottom: 1rem;
     resize: none;
   }
-  
-  input[type=submit] {
+
+  input[type='submit'] {
     background-color: $primary-accent-color;
     color: $primary-font-color;
     padding: 0.7rem;
@@ -347,11 +349,12 @@ section {
       margin: 0;
       right: 0;
       top: 100%;
-      ul  {
+      ul {
         flex-direction: column;
         align-items: center;
-        button, li {
-          width: 100% ;
+        button,
+        li {
+          width: 100%;
         }
       }
     }
@@ -377,7 +380,7 @@ section {
     }
     #drawing {
       position: absolute;
-      bottom:0;
+      bottom: 0;
       width: 100%;
       max-height: auto;
       transform-origin: bottom right;
