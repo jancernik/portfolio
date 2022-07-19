@@ -2,6 +2,7 @@ $bp1-width: 900px;
 $bp2-width: 500px;
 
 $background-color: #111518;
+$item-background-color: #1b2227;
 $primary-accent-color: #4ecca2;
 $primary-font-color: #fff;
 $secondary-font-color: #aaa;
@@ -10,11 +11,10 @@ $section-padding: 0 7rem;
 //HEADER
 $header-height: 6rem;
 $header-inline-padding: 4rem;
-$header-element-inline-padding: 0.5rem;
+$header-element-inline-padding: 0.75rem;
 $header-element-height: 2.5rem;
 $header-button-font-size: 1rem;
 $header-icon-font-size: 1.3rem;
-$header-gap: 0.5rem;
 
 $bp1-header-inline-padding: 1rem;
 
@@ -35,16 +35,22 @@ $bp1-profile-pic-size: 50%;
 $bp1-about-gap: 0;
 
 // PROJECTS
-$projects-grid-spacing-bp1: 0.5rem;
-$projects-grid-spacing-bp2: 1rem;
-$projects-grid-spacing-bp3: 1.5rem;
+$n-projects-visible: 3;
+$projects-spacing: 1.5rem;
+$projects-grid-peek: 4.5rem;
+$projects-padding: 1.2rem;
+$projects-title-font-size: 1.4rem;
+$projects-desc-font-size: 1.03rem;
+$projects-text-spacing: 1.2rem;
 
-$n-projects-visible-bp1: 1;
-$n-projects-visible-bp2: 2;
-$n-projects-visible-bp3: 3;
-$projects-grid-peek-bp1: $projects-grid-spacing-bp1 * 3;
-$projects-grid-peek-bp2: $projects-grid-spacing-bp2 * 2.5;
-$projects-grid-peek-bp3: $projects-grid-spacing-bp3 * 2.5;
+$bp1-n-projects-visible: 2;
+$bp1-projects-spacing: 1rem;
+$bp1-projects-grid-peek: 3rem;
+
+$bp2-n-projects-visible: 1;
+$bp2-projects-spacing: 0.5rem;
+$bp2-projects-grid-peek: 2rem;
+
 
 $bp1-section-padding: $header-height 2rem 0 2rem;
 $bp2-section-padding: $header-height/1.5 1rem 0 1rem;

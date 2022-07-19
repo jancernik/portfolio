@@ -12,16 +12,21 @@
   </head>
   <body>
     <header>
-      <i class="bi bi-twitter"></i>
-      <i class="bi bi-github"></i>
-      <a href="www.google.com">@cernikkk</a>
+      <a href="https://github.com/cernikkk" target="_blank"
+        ><i class="bi bi-github"></i
+      ></a>
+      <a href="https://twitter.com/cernikkk" target="_blank"
+        ><i class="bi bi-twitter"></i
+      ></a>
       <nav>
         <ul>
-          <li><button index="0" class="home section-btn">HOME</button></li>
-          <li><button index="1" class="about section-btn">ABOUT</button></li>
-          <li><button index="2" class="projects section-btn">PROJECTS</button></li>
-          <li><button index="3" class="contact section-btn">CONTACT</button></li>
+          <li><button index="0" class="section-btn">HOME</button></li>
+          <li><button index="1" class="section-btn">ABOUT</button></li>
+          <li><button index="2" class="section-btn">PROJECTS</button></li>
+          <li><button index="3" class="section-btn">CONTACT</button></li>
         </ul>
+        <div class="marker"></div>
+        <div class="hover"></div>
       </nav>
       <i class="bi bi-list hamburger-btn"></i>
     </header>
@@ -29,7 +34,7 @@
       <section id="home">
         <div class="title">
           <div>
-            <h1>Jan&nbsp;</h1>
+            <h1>Jan</h1>
             <h1>Cernik</h1>
           </div>
           <h2>full stack web developer</h2>
@@ -318,144 +323,140 @@
           </div>
           <p class="about-text">
             <span class="p">&lt;p&gt;&nbsp;</span>
-            My name is Jan Cernik, I'm a electronic technician and full stack web developer from Argentina. I started programming when I was 12, when my uncle gifted me an Arduino board for my birthday, since then I've been passionate about it, going throw many projects and languages and more recently deep diving in this exciting world of web development. Besides that I also enjoy modeling for 3D printing, photography and graphics design and practicing calisthenic.&nbsp;<span class="p">&lt;/p&gt;</span>
+            My name is Jan Cernik, I'm a electronic technician and full stack
+            web developer from Argentina. I started programming when I was 12,
+            when my uncle gifted me an Arduino board for my birthday, since then
+            I've been passionate about it, going throw many projects and
+            languages and more recently deep diving in this exciting world of
+            web development. Besides that I also enjoy modeling for 3D printing,
+            photography and graphics design and practicing
+            calisthenic.&nbsp;<span class="p">&lt;/p&gt;</span>
           </p>
         </div>
+        <div class="section-title">ABOUT ME</div>
       </section>
 
       <section id="projects">
-        <div class="project-grid">
-          <div class="project-item">
-            <img
-              src="./assets/images/projects/tic-tac-toe/thumbnail.png"
-              alt=""
-            />
-            <h3>Tic Tac Toe</h3>
-            <p class="short-description">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita
-              quod voluptatem quam eaque illum culpa, dignissimos
-            </p>
+        <div class="wrapper">
+          <button class="project-btn left hidden">
+            <i class="bi bi-caret-left-fill"></i>
+          </button>
+          <div class="project-grid">
+            <div class="project-item">
+              <img
+                src="./assets/images/projects/tic-tac-toe/thumbnail.png"
+                alt=""
+              />
+              <div>
+                <h3>Tic Tac Toe</h3>
+                <a href=""><i class="bi bi-github"></i></a>
+                <a href=""><i class="bi bi-box-arrow-up-right"></i></a>
+              </div>
+              <p class="short-description">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Expedita quod voluptatem quam eaque illum culpa, dignissimos
+              </p>
+            </div>
+            <div class="project-item">
+              <img
+                src="./assets/images/projects/battleship/thumbnail.png"
+                alt=""
+              />
+              <div>
+                <h3>Battleship</h3>
+                <a href=""><i class="bi bi-github"></i></a>
+                <a href=""><i class="bi bi-box-arrow-up-right"></i></a>
+              </div>
+              <p class="short-description">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Expedita quod voluptatem quam eaque illum culpa, dignissimos
+              </p>
+            </div>
+            <div class="project-item">
+              <img
+                src="./assets/images/projects/restaurant/thumbnail.png"
+                alt=""
+              />
+              <div>
+                <h3>Restaurant</h3>
+                <a href=""><i class="bi bi-github"></i></a>
+                <a href=""><i class="bi bi-box-arrow-up-right"></i></a>
+              </div>
+              <p class="short-description">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Expedita quod voluptatem quam eaque illum culpa, dignissimos
+              </p>
+            </div>
+            <div class="project-item">
+              <img
+                src="./assets/images/projects/shopping-cart/thumbnail.png"
+                alt=""
+              />
+              <div>
+                <h3>Lenss</h3>
+                <a href=""><i class="bi bi-github"></i></a>
+                <a href=""><i class="bi bi-box-arrow-up-right"></i></a>
+              </div>
+              <p class="short-description">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Expedita quod voluptatem quam eaque illum culpa, dignissimos
+              </p>
+            </div>
+            <div class="project-item">
+              <img src="./assets/images/projects/waldy/thumbnail.png" alt="" />
+              <div>
+                <h3>Waldy</h3>
+                <a href=""><i class="bi bi-github"></i></a>
+                <a href=""><i class="bi bi-box-arrow-up-right"></i></a>
+              </div>
+              <p class="short-description">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Expedita quod voluptatem quam eaque illum culpa, dignissimos
+              </p>
+            </div>
+            <div class="project-item">
+              <img
+                src="./assets/images/projects/calculator/thumbnail.png"
+                alt=""
+              />
+              <div>
+                <h3>Calculator</h3>
+                <a href=""><i class="bi bi-github"></i></a>
+                <a href=""><i class="bi bi-box-arrow-up-right"></i></a>
+              </div>
+              <p class="short-description">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Expedita quod voluptatem quam eaque illum culpa, dignissimos
+              </p>
+            </div>
           </div>
-          <div class="project-item">
-            <img
-              src="./assets/images/projects/battleship/thumbnail.png"
-              alt=""
-            />
-            <h3>Battleship</h3>
-            <p class="short-description">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita
-              quod voluptatem quam eaque illum culpa, dignissimos
-            </p>
-          </div>
-          <div class="project-item">
-            <img
-              src="./assets/images/projects/restaurant/thumbnail.png"
-              alt=""
-            />
-            <h3>Restaurant</h3>
-            <p class="short-description">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita
-              quod voluptatem quam eaque illum culpa, dignissimos
-            </p>
-          </div>
-          <div class="project-item">
-            <img
-              src="./assets/images/projects/shopping-cart/thumbnail.png"
-              alt=""
-            />
-            <h3>Lenss</h3>
-            <p class="short-description">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita
-              quod voluptatem quam eaque illum culpa, dignissimos
-            </p>
-          </div>
-          <div class="project-item">
-            <img src="./assets/images/projects/waldy/thumbnail.png" alt="" />
-            <h3>Waldy</h3>
-            <p class="short-description">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita
-              quod voluptatem quam eaque illum culpa, dignissimos
-            </p>
-          </div>
-          <div class="project-item">
-            <img
-              src="./assets/images/projects/calculator/thumbnail.png"
-              alt=""
-            />
-            <h3>Calculator</h3>
-            <p class="short-description">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita
-              quod voluptatem quam eaque illum culpa, dignissimos
-            </p>
-          </div>
+          <button class="project-btn right">
+            <i class="bi bi-caret-right-fill"></i>
+          </button>
         </div>
-
-        <div class="technologies">
-          <div>
-            <i class="devicon-css3-plain"></i>
-            CSS3
-          </div>
-          <div>
-            <i class="devicon-firebase-plain"></i>
-            FIREBASE
-          </div>
-          <div>
-            <i class="devicon-git-plain"></i>
-            GIT
-          </div>
-          <div>
-            <i class="devicon-github-original"></i>
-            GITHUB
-          </div>
-          <div>
-            <i class="devicon-html5-plain"></i>
-            HTML5
-          </div>
-          <div>
-            <i class="devicon-javascript-plain"></i>
-            JAVASCRIPT
-          </div>
-          <div>
-            <i class="devicon-jest-plain"></i>
-            JEST
-          </div>
-          <div>
-            <i class="devicon-nodejs-plain"></i>
-            NODEJS
-          </div>
-          <div>
-            <i class="devicon-npm-original-wordmark"></i>
-            NPM
-          </div>
-          <div>
-            <i class="devicon-python-plain"></i>
-            PYTHON
-          </div>
-          <div>
-            <i class="devicon-react-original"></i>
-            REACT
-          </div>
-          <div>
-            <i class="devicon-sass-original"></i>
-            SASS
-          </div>
-          <div>
-            <i class="devicon-webpack-plain"></i>
-            WEBPACK
-          </div>
-        </div>
+        <div class="section-title">MY WORK</div>
       </section>
 
       <section id="contact">
         <form action="">
           <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Name">
+          <input type="text" id="name" name="name" placeholder="Name" />
           <label for="email">Email address</label>
-          <input type="email" name="email" id="email" placeholder="Email address">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email address"
+          />
           <label for="subject">Subject</label>
-          <textarea id="subject" name="subject" placeholder="Write something..."></textarea>
-          <input type="submit" value="Submit">
+          <textarea
+            id="subject"
+            name="subject"
+            placeholder="Write something..."
+          ></textarea>
+          <input type="submit" value="Submit" />
         </form>
+        <div class="section-title">CONTACT</div>
       </section>
     </div>
   </body>

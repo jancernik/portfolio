@@ -13,6 +13,20 @@ export default function BindAllEvents() {
   document.querySelectorAll('.section-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       Handle.menuClick(btn);
+      Handle.menuHover(false);
+    });
+    btn.addEventListener('mouseover', () => {
+      Handle.menuHover(true, btn);
+    });
+  });
+
+  document.querySelector('nav').addEventListener('mouseout', () => {
+    Handle.menuHover(false);
+  });
+
+  document.querySelectorAll('.project-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      Handle.projectClick(btn);
     });
   });
 
@@ -38,6 +52,10 @@ export default function BindAllEvents() {
       Handle.swipe(dX, dY);
     }
   }, { passive: false });
+
+  window.addEventListener('keydown', (e) => {
+    Handle.keyboard(e);
+  });
 
   window.addEventListener('resize', () => {
     Handle.resize();

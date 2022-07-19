@@ -1,6 +1,6 @@
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import '~normalize.css/normalize';
-@import ' ~rfs/scss';
+@import '~rfs/scss';
 @import './constants';
 
 @font-face {
@@ -18,11 +18,6 @@
 @font-face {
   font-family: 'Kirvy Bold';
   src: url('../assets/fonts/Kirvy/Kirvy-Bold.otf');
-}
-
-@font-face {
-  font-family: 'Roboto Mono';
-  src: url('../assets/fonts/Roboto/RobotoMono-Variable.ttf');
 }
 
 * {
@@ -54,25 +49,44 @@ header {
   top: 0;
   align-items: center;
   padding-inline: $header-inline-padding;
-  gap: $header-gap;
   z-index: 20;
-  a,
-  i {
+  a {
     padding-block: ($header-element-height - $header-icon-font-size)/2;
     padding-inline: $header-element-inline-padding;
     font-family: Kirvy Bold;
     font-size: $header-icon-font-size;
     color: $secondary-font-color;
     text-decoration: none;
-  }
-  a {
-    display: none;
+    i {
+      margin: 0;
+      padding: 0;
+    }
   }
   nav {
     margin-left: auto;
+    position: relative;
+    .marker {
+      position: absolute;
+      z-index: -1;
+      height: 80%;
+      bottom: 10%;
+      left: 0;
+      background-color: $primary-accent-color;
+      transform-origin: bottom left;
+    }
+    .hover {
+      position: absolute;
+      height: 6.4%;
+      bottom: 10%;
+      background-color: $primary-accent-color;
+      transform: scaleX(0);
+      transform-origin: bottom center;
+      // transition: transform 0.25s ease-in-out;
+      transition: 0.25s ease-in-out;
+      pointer-events: none;
+    }
     ul {
       display: flex;
-      gap: $header-gap;
       list-style: none;
       button {
         padding-block: ($header-element-height - $header-button-font-size)/2;
@@ -82,7 +96,22 @@ header {
         color: $secondary-font-color;
         background: none;
         border: none;
+        position: relative;
         cursor: pointer;
+        // &:not(.active):hover::after {
+        //   position: absolute;
+        //   content: '';
+        //   width: 100%;
+        //   left: 0;
+        //   bottom: 10%;
+        //   height: 8%;
+        //   background: $primary-accent-color;
+        // }
+      }
+      .active {
+        color: $primary-font-color;
+        color: $background-color;
+        transition: 200ms ease-in-out 1000ms;
       }
     }
   }
@@ -102,6 +131,22 @@ section {
   width: 100vw;
   height: calc(100vh - calc(100vh - 100%));
   padding: $section-padding;
+  .section-title {
+    position: absolute;
+    font-size: 2.5rem;
+    font-family: Kirvy Thin;
+    color: $primary-accent-color;
+    // font-family: Kirvy Light;
+    // font-family: Kirvy Regular;
+    // font-family: Kirvy Bold;
+    letter-spacing: 1.3rem;
+    opacity: 0.03;
+    opacity:0.5;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1rem;
+    display: none;
+  }
 }
 
 @supports (-moz-appearance: none) {
@@ -141,8 +186,8 @@ section {
 .bi-arrow-down {
   position: fixed;
   bottom: 1rem;
-  left: 50%;
-  transform: translateY(-50%);
+  left: 0;
+  transform: translateX(50%);
   font-size: 2rem;
   display: none;
 }
@@ -192,7 +237,7 @@ section {
     .p {
       display: flex;
       padding: 0.5rem 0;
-      font-family: Roboto Mono;
+      font-family: monospace;
       color: $primary-accent-color;
     }
   }
@@ -203,18 +248,72 @@ section {
   justify-content: center;
   width: 100%;
   gap: 4rem;
+  .project-btn.hidden {
+    display: none;
+  }
+  .wrapper {
+    position: relative;
+    button {
+      cursor: pointer;
+      position: absolute;
+      z-index: 10;
+      top: 50%;
+      height: 100%;
+      background: none;
+      border: none;
+      color: $secondary-font-color;
+      font-size: 1.8rem;
+      width: $projects-grid-peek;
+    }
+    button:nth-of-type(1) {
+      transform: translate(-100%, -50%);
+      // transform: translate(0%, -50%);
+      left: 0;
+    }
+    button:nth-of-type(2) {
+      transform: translate(100%, -50%);
+      // transform: translate(0%, -50%);
+      right: 0;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: $projects-grid-peek;
+      height: 100%;
+      background: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 0) 0%,
+        $background-color 100%
+      );
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: $projects-grid-peek;
+      height: 100%;
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0) 0%,
+        $background-color 100%
+      );
+    }
+  }
   .project-grid {
-    padding: $projects-grid-spacing-bp3 $projects-grid-peek-bp3;
-    scroll-padding-inline: $projects-grid-peek-bp3;
+    padding: $projects-spacing $projects-grid-peek;
+    scroll-padding-inline: $projects-grid-peek;
     scroll-snap-type: inline mandatory;
     display: grid;
     grid-auto-flow: column;
-    gap: $projects-grid-spacing-bp3;
+    gap: $projects-spacing;
     grid-auto-columns: calc(
-      (100% / $n-projects-visible-bp3) -
+      (100% / $n-projects-visible) -
         (
-          ($projects-grid-spacing-bp3 * ($n-projects-visible-bp3 - 1)) /
-            ($n-projects-visible-bp3)
+          ($projects-spacing * ($n-projects-visible - 1)) /
+            ($n-projects-visible)
         )
     );
     overflow: auto;
@@ -223,49 +322,39 @@ section {
     .project-item {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: $projects-text-spacing;
       scroll-snap-align: start;
+      background-color: $item-background-color;
+      padding-bottom: $projects-padding;
       img {
         max-width: 100%;
         // border-radius: 1.2rem;
       }
-      h3,
+      div {
+        display: flex;
+        margin-inline: $projects-padding;
+        i {
+          margin-left: $projects-title-font-size/1.5;
+          font-size: $projects-title-font-size * 0.9;
+          color: $secondary-font-color;
+        }
+      }
       p {
-        margin-inline: 1rem;
+        margin-inline: $projects-padding;
+        line-height: $projects-desc-font-size * 1.3;
       }
       h3 {
+        margin-right: auto;
+      }
+      h3,
+      div {
         font-family: Kirvy Bold;
-        font-size: 1.4rem;
+        font-size: $projects-title-font-size;
         color: $primary-accent-color;
       }
       p {
         font-family: Kirvy Light;
-        font-size: 1.06rem;
-      }
-    }
-  }
-  .technologies {
-    display: flex;
-    display: none;
-    justify-content: center;
-    gap: 0.5rem;
-    i {
-      font-size: 1.4rem;
-    }
-    div {
-      font-family: Kirvy Light;
-      font-size: 0.9rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      padding-inline: 1rem;
-      color: transparent;
-      i {
-        color: $primary-font-color;
-      }
-      &:hover {
-        color: $primary-accent-color;
+        font-size: $projects-desc-font-size;
       }
     }
   }
@@ -319,16 +408,29 @@ section {
     }
   }
   #projects .project-grid {
-    padding: $projects-grid-spacing-bp2 $projects-grid-peek-bp2;
-    scroll-padding-inline: $projects-grid-peek-bp2;
-    gap: $projects-grid-spacing-bp2;
+    padding: $bp1-projects-spacing $bp1-projects-grid-peek;
+    scroll-padding-inline: $bp1-projects-grid-peek;
+    gap: $bp1-projects-spacing;
     grid-auto-columns: calc(
-      (100% / $n-projects-visible-bp2) -
+      (100% / $bp1-n-projects-visible) -
         (
-          ($projects-grid-spacing-bp2 * ($n-projects-visible-bp2 - 1)) /
-            ($n-projects-visible-bp2)
+          ($bp1-projects-spacing * ($bp1-n-projects-visible - 1)) /
+            ($bp1-n-projects-visible)
         )
     );
+  }
+  #projects {
+    .wrapper {
+      button {
+        width: $bp1-projects-grid-peek;
+      }
+      &::before {
+        width: $bp1-projects-grid-peek;
+      }
+      &::after {
+        width: $bp1-projects-grid-peek;
+      }
+    }
   }
 }
 
@@ -388,15 +490,40 @@ section {
     }
   }
   #projects .project-grid {
-    padding: $projects-grid-spacing-bp1 $projects-grid-peek-bp1;
-    scroll-padding-inline: $projects-grid-peek-bp1;
-    gap: $projects-grid-spacing-bp1;
+    padding: $bp2-projects-spacing $bp2-projects-grid-peek;
+    scroll-padding-inline: $bp2-projects-grid-peek;
+    gap: $bp2-projects-spacing;
     grid-auto-columns: calc(
-      (100% / $n-projects-visible-bp1) -
+      (100% / $bp2-n-projects-visible) -
         (
-          ($projects-grid-spacing-bp1 * ($n-projects-visible-bp1 - 1)) /
-            ($n-projects-visible-bp1)
+          ($bp2-projects-spacing * ($bp2-n-projects-visible - 1)) /
+            ($bp2-n-projects-visible)
         )
     );
+  }
+  #projects {
+    .wrapper {
+      button {
+        width: $bp2-projects-grid-peek;
+        background-color: $item-background-color;
+        width: 30%;
+        top: calc(100% + 0.5rem);
+        height: 3.5rem;
+      }
+      button:nth-of-type(1) {
+        transform: translate(-100%, 0);
+        left: calc(50% - 0.5rem);
+      }
+      button:nth-of-type(2) {
+        transform: translate(100%, 0);
+        right: calc(50% - 0.5rem);
+      }
+      &::before {
+        width: $bp2-projects-grid-peek;
+      }
+      &::after {
+        width: $bp2-projects-grid-peek;
+      }
+    }
   }
 }

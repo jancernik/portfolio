@@ -34,20 +34,9 @@ export default class Animate {
     });
   }
 
-  static pScrollRight(projects) {
-    if (inView < projects.length - g.nVisible) {
-      wasMovedRight = true;
-      inView += g.nVisible;
-      if (wasMovedLeft) {
-        wasMovedLeft = false;
-        inView += g.nVisible - 1;
-      }
-      projects[inView].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-    }
-  }
-
   static pScrollLeft(projects) {
     if (inView > g.nVisible - 1) {
+      document.querySelector('.project-btn.right').classList.remove('hidden');
       wasMovedLeft = true;
       inView -= g.nVisible;
       if (wasMovedRight) {
@@ -55,6 +44,51 @@ export default class Animate {
         inView -= g.nVisible - 1;
       }
       projects[inView].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      if (inView === 0) {
+        document.querySelector('.project-btn.left').classList.add('hidden');
+      }
     }
+  }
+
+  static pScrollRight(projects) {
+    if (inView < projects.length - g.nVisible) {
+      document.querySelector('.project-btn.left').classList.remove('hidden');
+      wasMovedRight = true;
+      inView += g.nVisible;
+      if (wasMovedLeft) {
+        wasMovedLeft = false;
+        inView += g.nVisible - 1;
+      }
+      projects[inView].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      if (inView === projects.length - 1) {
+        document.querySelector('.project-btn.right').classList.add('hidden');
+      }
+    }
+  }
+
+  static navMarker(btn) {
+    anime({
+      targets: '.marker',
+      scaleY: [
+        { value: 0.08, duration: 200 },
+        { value: 1, duration: 200, delay: 800 },
+      ],
+      translateX: [
+        {
+          value: btn.offsetLeft + btn.offsetWidth / 18,
+          duration: 800,
+          delay: 200,
+        },
+      ],
+      width: [
+        {
+          value: btn.offsetWidth - btn.offsetWidth / 9,
+          duration: 800,
+          delay: 200,
+        },
+      ],
+      easing: 'easeOutElastic(1, .8)',
+      duration: 1200,
+    });
   }
 }
