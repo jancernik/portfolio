@@ -8,8 +8,7 @@ export default class Style {
       const t = document.querySelector('.title');
       const p = (h.offsetHeight - d.offsetHeight - t.offsetHeight) / 2;
       document.querySelector('#home').style.paddingTop = `${p}px`;
-    }
-    else {
+    } else {
       document.querySelector('#home').style.paddingTop = '0';
     }
   }

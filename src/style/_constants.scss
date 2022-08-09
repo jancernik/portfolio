@@ -3,6 +3,7 @@ $bp2-width: 500px;
 
 $background-color: #111518;
 $item-background-color: #1b2227;
+$input-background-color: #263038;
 $primary-accent-color: #4ecca2;
 $primary-font-color: #fff;
 $secondary-font-color: #aaa;
@@ -54,3 +55,14 @@ $bp2-projects-grid-peek: 2rem;
 
 $bp1-section-padding: $header-height 2rem 0 2rem;
 $bp2-section-padding: $header-height/1.5 1rem 0 1rem;
+
+// CONTACT
+$button-border-thickness: 2px;
+$button-content-color: $secondary-font-color;
+$button-transition: 0.4s;
+
+$arrow-width: 1rem;
+$arrow-height: 8px;
+$arrow-thickness: 2px;
+$arrow-color: $button-content-color;
+$arrow-transition: 0.3s;

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" viewBox="0 0 97.898 30.114" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<clipPath id="a">
+<path d="M 0,841.89 H 595.276 V 0 H 0 Z"/>
+</clipPath>
+</defs>
+<g transform="matrix(1.3333 0 0 -1.3333 -220.65 519.42)">
+<g stroke-width="2.1345">
+<g clip-path="url(#a)" stroke-width="2.1345">
+<g transform="translate(.12611 .48657)" stroke-width="2.1345">
+<g transform="translate(233.86 382.46)">
+<path d="m0 0c-29.505-22.008-63.585-1.788-63.585-1.788" fill="none" stroke="#231f20" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2.1345"/>
+</g>
+<g transform="translate(225.06 383.37)" style="paint-order:stroke fill markers">
+<path d="m0 0 8.805-0.912-2.8281-7.9964" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.1345" style="paint-order:stroke fill markers"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

@@ -103,11 +103,11 @@ export default class Handle {
 
   static keyboard(e) {
     if (e.key === ' ') {
-      e.preventDefault();
-      if (g.scrollEnded && g.currentSection < sections.length - 1) {
-        g.currentSection += 1;
-        Animate.pageScroll(sections, true);
-      }
+      // e.preventDefault();
+      // if (g.scrollEnded && g.currentSection < sections.length - 1) {
+      //   g.currentSection += 1;
+      //   Animate.pageScroll(sections, true);
+      // }
     }
   }
 

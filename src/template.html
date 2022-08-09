@@ -438,23 +438,91 @@
       </section>
 
       <section id="contact">
-        <form action="">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Name" />
-          <label for="email">Email address</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email address"
-          />
-          <label for="subject">Subject</label>
-          <textarea
-            id="subject"
-            name="subject"
-            placeholder="Write something..."
-          ></textarea>
-          <input type="submit" value="Submit" />
+        <div class="container">
+          <h2>Let's make something!</h2>
+          <div>
+            Ping me an email at
+            <a href="mailto:jancernik12@gmail.com">jancernik12@gmail.com</a>
+          </div>
+          <div class="send-message">
+            <span>or send me a message directly</span
+            ><svg
+              version="1.1"
+              viewBox="0 0 97.898 30.114"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <clipPath id="a">
+                  <path d="M 0,841.89 H 595.276 V 0 H 0 Z" />
+                </clipPath>
+              </defs>
+              <g transform="matrix(1.3333 0 0 -1.3333 -220.65 519.42)">
+                <g stroke-width="1.2">
+                  <g clip-path="url(#a)" stroke-width="1.2">
+                    <g
+                      transform="translate(.12611 .48657)"
+                      stroke-width="1.2"
+                    >
+                      <g transform="translate(233.86 382.46)">
+                        <path
+                          d="m0 0c-29.505-22.008-63.585-1.788-63.585-1.788"
+                          fill="none"
+                          stroke="#fff"
+                          stroke-linecap="round"
+                          stroke-miterlimit="10"
+                          stroke-width="1.2"
+                        />
+                      </g>
+                      <g
+                        transform="translate(225.06 383.37)"
+                        style="paint-order: stroke fill markers"
+                      >
+                        <path
+                          d="m0 0 8.805-0.912-2.8281-7.9964"
+                          fill="none"
+                          stroke="#fff"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-miterlimit="10"
+                          stroke-width="1.2"
+                          style="paint-order: stroke fill markers"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <form action="https://api.web3forms.com/submit" method="POST">
+          <div class="content">
+            <input
+              type="hidden"
+              name="access_key"
+              value="7da50360-a7ad-4321-847b-1efa5a4ace14"
+            />
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Name" />
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email address"
+            />
+            <label for="subject">Subject</label>
+            <textarea
+              id="subject"
+              name="subject"
+              placeholder="Write something..."
+              rows="4"
+            ></textarea>
+          </div>
+          <button type="submit">
+            <span>Send</span> 
+            <div class="arrow"></div>
+          </button>
         </form>
         <div class="section-title">CONTACT</div>
       </section>
