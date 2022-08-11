@@ -20,6 +20,11 @@ export default function BindAllEvents() {
     });
   });
 
+  document.querySelector('form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    Handle.submit();
+  });
+
   document.querySelector('nav').addEventListener('mouseout', () => {
     Handle.menuHover(false);
   });

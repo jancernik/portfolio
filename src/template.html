@@ -333,7 +333,6 @@
             calisthenic.&nbsp;<span class="p">&lt;/p&gt;</span>
           </p>
         </div>
-        <div class="section-title">ABOUT ME</div>
       </section>
 
       <section id="projects">
@@ -434,97 +433,129 @@
             <i class="bi bi-caret-right-fill"></i>
           </button>
         </div>
-        <div class="section-title">MY WORK</div>
       </section>
 
       <section id="contact">
-        <div class="container">
-          <h2>Let's make something!</h2>
-          <div>
-            Ping me an email at
-            <a href="mailto:jancernik12@gmail.com">jancernik12@gmail.com</a>
-          </div>
-          <div class="send-message">
-            <span>or send me a message directly</span
-            ><svg
-              version="1.1"
-              viewBox="0 0 97.898 30.114"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <clipPath id="a">
-                  <path d="M 0,841.89 H 595.276 V 0 H 0 Z" />
-                </clipPath>
-              </defs>
-              <g transform="matrix(1.3333 0 0 -1.3333 -220.65 519.42)">
-                <g stroke-width="1.2">
-                  <g clip-path="url(#a)" stroke-width="1.2">
-                    <g
-                      transform="translate(.12611 .48657)"
-                      stroke-width="1.2"
-                    >
-                      <g transform="translate(233.86 382.46)">
-                        <path
-                          d="m0 0c-29.505-22.008-63.585-1.788-63.585-1.788"
-                          fill="none"
-                          stroke="#fff"
-                          stroke-linecap="round"
-                          stroke-miterlimit="10"
-                          stroke-width="1.2"
-                        />
-                      </g>
+        <div class="contact-container left">
+          <div class="message">
+            <h2>Let's make something!</h2>
+            <div>
+              <span>Ping me an email at</span>
+              <a href="mailto:jancernik12@gmail.com">jancernik12@gmail.com</a>
+            </div>
+            <div>
+              <span>or send me a message directly</span>
+              <!-- <svg
+                version="1.1"
+                viewBox="0 0 97.898 30.114"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <clipPath id="a">
+                    <path d="M 0,841.89 H 595.276 V 0 H 0 Z" />
+                  </clipPath>
+                </defs>
+                <g transform="matrix(1.3333 0 0 -1.3333 -220.65 519.42)">
+                  <g stroke-width="1.2">
+                    <g clip-path="url(#a)" stroke-width="1.2">
                       <g
-                        transform="translate(225.06 383.37)"
-                        style="paint-order: stroke fill markers"
+                        transform="translate(.12611 .48657)"
+                        stroke-width="1.2"
                       >
-                        <path
-                          d="m0 0 8.805-0.912-2.8281-7.9964"
-                          fill="none"
-                          stroke="#fff"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-miterlimit="10"
-                          stroke-width="1.2"
+                        <g transform="translate(233.86 382.46)">
+                          <path
+                            d="m0 0c-29.505-22.008-63.585-1.788-63.585-1.788"
+                            fill="none"
+                            stroke="#fff"
+                            stroke-linecap="round"
+                            stroke-miterlimit="10"
+                            stroke-width="1.2"
+                          />
+                        </g>
+                        <g
+                          transform="translate(225.06 383.37)"
                           style="paint-order: stroke fill markers"
-                        />
+                        >
+                          <path
+                            d="m0 0 8.805-0.912-2.8281-7.9964"
+                            fill="none"
+                            stroke="#fff"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-miterlimit="10"
+                            stroke-width="1.2"
+                            style="paint-order: stroke fill markers"
+                          />
+                        </g>
                       </g>
                     </g>
                   </g>
                 </g>
-              </g>
-            </svg>
+              </svg> -->
+            </div>
           </div>
         </div>
-        <form action="https://api.web3forms.com/submit" method="POST">
-          <div class="content">
-            <input
-              type="hidden"
-              name="access_key"
-              value="7da50360-a7ad-4321-847b-1efa5a4ace14"
-            />
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Name" />
-            <label for="email">Email address</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Email address"
-            />
-            <label for="subject">Subject</label>
-            <textarea
-              id="subject"
-              name="subject"
-              placeholder="Write something..."
-              rows="4"
-            ></textarea>
-          </div>
-          <button type="submit">
-            <span>Send</span> 
-            <div class="arrow"></div>
-          </button>
-        </form>
-        <div class="section-title">CONTACT</div>
+        <div class="contact-container right">
+          <form action="https://api.web3forms.com/submit" method="POST">
+            <div class="content">
+              <input
+                type="hidden"
+                name="access_key"
+                value="7da50360-a7ad-4321-847b-1efa5a4ace14"
+              />
+              <input type="hidden" name="subject" value="New portfolio message">
+              <input type="checkbox" name="botcheck" id="" style="display: none;">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Name"
+                required
+              />
+              <label for="email">Email address</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email address"
+                required
+              />
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Write something..."
+                rows="4"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="submit">
+              <span>Send</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="arrow"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+              <div class="end-message positive">
+                <p>Message sent successfully!</p>
+                <p>I'll get back to you as soon as possible.</p>
+              </div>
+              <div class="end-message negative">
+                <p>Oops, there was an error!</p>
+                <p>Try again or email me instead.</p>
+              </div>
+            </button>
+          </form>
+        </div>
       </section>
     </div>
   </body>

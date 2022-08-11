@@ -1,6 +1,7 @@
 import anime from 'animejs/lib/anime.es';
 import c from './config';
 import g from './global';
+import scss from '../style/export.module.scss';
 
 let wasMovedRight = false;
 let wasMovedLeft = true;
@@ -90,5 +91,37 @@ export default class Animate {
       easing: 'easeOutElastic(1, .8)',
       duration: 1200,
     });
+  }
+
+  static submit() {
+    const dur = parseInt(scss.animDur, 10);
+    const delay = parseInt(scss.animDelay, 10);
+    const formContent = document.querySelector('form .content');
+    const formHeight = formContent.getBoundingClientRect().height;
+    const submitBtn = document.querySelector('.submit');
+    submitBtn.classList.add('clicked');
+    formContent.classList.add('th');
+    setTimeout(() => {
+      formContent.classList.add('tv');
+      submitBtn.style.transform = `translate(-50%, calc(1.5rem - ${
+        formHeight / 2
+      }px)) scale(${scss.scaleY}, ${scss.scaleX})`;
+    }, dur + delay);
+    setTimeout(() => {
+      submitBtn.classList.add('fill');
+    }, dur * 2 + delay * 2);
+    setTimeout(() => {
+      document.querySelector('form').classList.add('animation-ended');
+    }, dur * 5);
+  }
+
+  static submitEndPositive() {
+    document.querySelector('.submit').style.overflow = 'visible';
+    document.querySelector('.submit .positive').classList.add('active');
+  }
+
+  static submitEndNegative() {
+    document.querySelector('.submit').style.overflow = 'visible';
+    document.querySelector('.submit .negative').classList.add('active');
   }
 }

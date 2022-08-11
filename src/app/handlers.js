@@ -37,6 +37,49 @@ export default class Handle {
     }
   }
 
+  static submit() {
+    const form = document.querySelector('form');
+    const formData = new FormData(form);
+    Animate.submit();
+    const object = {};
+    formData.forEach((value, key) => {
+      object[key] = value;
+    });
+
+    const submitForm = async () => {
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(object),
+        });
+        const checkIfAnimationEnded = setInterval(() => {
+          const ended = form.classList.contains('animation-ended');
+          if (ended) {
+            if (response.status === 200) {
+              Animate.submitEndPositive();
+            } else {
+              Animate.submitEndNegative();
+            }
+            clearInterval(checkIfAnimationEnded);
+          }
+        }, 100);
+      } catch (error) {
+        const checkIfAnimationEnded = setInterval(() => {
+          const ended = form.classList.contains('animation-ended');
+          if (ended) {
+            Animate.submitEndNegative();
+            clearInterval(checkIfAnimationEnded);
+          }
+        }, 100);
+      }
+    };
+    submitForm();
+  }
+
   static scroll(e) {
     // Allow zooming with the Ctrl key
     if (!e.ctrlKey) {
