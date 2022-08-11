@@ -397,9 +397,8 @@ section {
         font-family: Kirvy Bold;
         font-size: 1.1rem;
       }
-      input[type='text'],
-      input[type='email'],
-      textarea {
+      #name, #email,
+      #message {
         background: $input-background-color;
         color: $primary-font-color;
         font-size: 1.1rem;
