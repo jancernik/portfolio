@@ -25,6 +25,11 @@ export default function BindAllEvents() {
     Handle.submit();
   });
 
+  document.getElementById('copy-email').addEventListener('click', (e) => {
+    e.currentTarget.classList.add('copied');
+    navigator.clipboard.writeText('jancernik12@gmail.com');
+  });
+
   document.querySelector('nav').addEventListener('mouseout', () => {
     Handle.menuHover(false);
   });
@@ -35,28 +40,40 @@ export default function BindAllEvents() {
     });
   });
 
-  window.addEventListener('wheel', (e) => {
-    Handle.scroll(e);
-  }, { passive: false });
+  window.addEventListener(
+    'wheel',
+    (e) => {
+      Handle.scroll(e);
+    },
+    { passive: false },
+  );
 
-  window.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    tStartX = e.changedTouches[0].screenX;
-    tStartY = e.changedTouches[0].screenY;
-  }, { passive: false });
+  window.addEventListener(
+    'touchstart',
+    (e) => {
+      e.preventDefault();
+      tStartX = e.changedTouches[0].screenX;
+      tStartY = e.changedTouches[0].screenY;
+    },
+    { passive: false },
+  );
 
-  window.addEventListener('touchend', (e) => {
-    e.preventDefault();
-    tEndX = e.changedTouches[0].screenX;
-    tEndY = e.changedTouches[0].screenY;
-    if (tEndY === tStartY) {
-      e.target.click();
-    } else {
-      const dX = tEndX - tStartX;
-      const dY = tEndY - tStartY;
-      Handle.swipe(dX, dY);
-    }
-  }, { passive: false });
+  window.addEventListener(
+    'touchend',
+    (e) => {
+      e.preventDefault();
+      tEndX = e.changedTouches[0].screenX;
+      tEndY = e.changedTouches[0].screenY;
+      if (tEndY === tStartY) {
+        e.target.click();
+      } else {
+        const dX = tEndX - tStartX;
+        const dY = tEndY - tStartY;
+        Handle.swipe(dX, dY);
+      }
+    },
+    { passive: false },
+  );
 
   window.addEventListener('keydown', (e) => {
     Handle.keyboard(e);

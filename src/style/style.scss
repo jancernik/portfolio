@@ -341,7 +341,7 @@ section {
   justify-content: center;
   align-items: center;
   width: 100%;
-  gap: 10rem;
+  gap: 8rem;
   .contact-container {
     display: flex;
     flex: 1 1 0;
@@ -352,16 +352,125 @@ section {
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-left: auto;
+      gap: 0.6rem;
+      font-size: 1.5rem;
       h2 {
         font-family: Kirvy Bold;
-        font-size: 2.7rem;
+        transform: scale(1.4);
+        font-size: 1.6rem;
         margin-bottom: 2rem;
         text-align: center;
+      }
+      div:last-of-type {
+        margin-top: 0.4rem;
+      }
+      .email {
+        cursor: pointer;
+        color: $primary-accent-color;
+        text-decoration: underline;
+        position: relative;
+        .email-actions {
+          transition: 0.3s cubic-bezier(0.87, 0.07, 0.28, 1.01);
+          position: absolute;
+          pointer-events: none;
+          opacity: 0;
+          display: flex;
+          left: 100%;
+          top: 50%;
+          border-radius: 0.3rem;
+          transform: translate(10%, -45%);
+          background-color: $input-background-color;
+          justify-content: center;
+          align-items: center;
+          padding: 0.7rem;
+          gap: 0.9rem;
+          svg {
+            color: $secondary-font-color;
+            height: 1.3rem;
+            width: 1.3rem;
+            display: flex;
+          }
+          .copied {
+            .copy {
+              display: none;
+            }
+            .check {
+              display: block;
+              color: $primary-accent-color;
+            }
+          }
+          button {
+            margin: 0;
+            padding: 0;
+            background: none;
+            border: none;
+            .check {
+              display: none;
+            }
+          }
+          button,
+          a {
+            cursor: pointer;
+            &:hover {
+              svg {
+                color: $primary-accent-color;
+              }
+            }
+          }
+          &::before {
+            position: absolute;
+            left: -0.7rem;
+            top: 50%;
+            transform: translateY(-50%);
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 0.8rem solid transparent;
+            border-bottom: 0.8rem solid transparent;
+            border-right: 0.8rem solid $input-background-color;
+          }
+          &::after {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .email:hover {
+        .email-actions {
+          pointer-events: all;
+          opacity: 1;
+          transform: translate(30%, -45%);
+        }
       }
       div:last-child {
         width: fit-content;
         position: relative;
         text-align: center;
+      }
+    }
+    .message:last-child {
+      position: relative;
+      .arrow {
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        transform: translate(1rem, -45%);
+        height: 1.6rem;
+        width: 1.6rem;
+        animation: arrow 1.2s infinite alternate;
+      }
+      @keyframes arrow {
+        0% {
+          transform: translate(1rem, -45%);
+        }
+        100% {
+          transform: translate(0.5rem, -45%);
+        }
       }
     }
     form {
@@ -397,7 +506,8 @@ section {
         font-family: Kirvy Bold;
         font-size: 1.1rem;
       }
-      #name, #email,
+      #name,
+      #email,
       #message {
         background: $input-background-color;
         color: $primary-font-color;
@@ -410,6 +520,9 @@ section {
         margin-bottom: 1.5rem;
         resize: none;
         transition: 0.2s ease-in-out;
+      }
+      #message {
+        margin-bottom: 0;
       }
       .submit {
         position: absolute;
@@ -437,7 +550,10 @@ section {
           opacity: 0;
           width: 400%;
           background: $background-color;
-          transform: scale(math.div(1, $form-button-end-scaleY), math.div(0.6, $form-button-end-scaleX));
+          transform: scale(
+            math.div(1, $form-button-end-scaleY),
+            math.div(0.6, $form-button-end-scaleX)
+          );
           p:first-child {
             font-size: 1.8rem;
             margin-bottom: 0.7rem;
@@ -455,8 +571,11 @@ section {
         }
         .active {
           opacity: 1;
-          transform: scale(math.div(1, $form-button-end-scaleY), math.div(1, $form-button-end-scaleX));
-        };
+          transform: scale(
+            math.div(1, $form-button-end-scaleY),
+            math.div(1, $form-button-end-scaleX)
+          );
+        }
         span {
           padding-left: $arrow-width;
           transition: calc($form-button-dur * 1ms) ease-in-out;
@@ -511,6 +630,76 @@ section {
       .content.tv {
         transform: scale(0.08, 0);
       }
+    }
+  }
+}
+@media (max-width: $bp1-width) {
+  header {
+    padding-inline: $bp1-header-inline-padding;
+  }
+  section {
+    padding: $bp1-section-padding;
+  }
+  #about .wrapper {
+    flex-direction: column;
+    gap: $bp1-about-gap;
+    .profile {
+      max-width: $bp1-profile-pic-size;
+    }
+  }
+  #projects .project-grid {
+    padding: $bp1-projects-spacing $bp1-projects-grid-peek;
+    scroll-padding-inline: $bp1-projects-grid-peek;
+    gap: $bp1-projects-spacing;
+    grid-auto-columns: calc(
+      (100% / $bp1-n-projects-visible) -
+        (
+          ($bp1-projects-spacing * ($bp1-n-projects-visible - 1)) /
+            ($bp1-n-projects-visible)
+        )
+    );
+  }
+  #projects {
+    .wrapper {
+      button {
+        width: $bp1-projects-grid-peek;
+      }
+      &::before {
+        width: $bp1-projects-grid-peek;
+      }
+      &::after {
+        width: $bp1-projects-grid-peek;
+      }
+    }
+  }
+  #contact {
+    padding-bottom: 4rem;
+    flex-direction: column;
+    gap: 0;
+    height: 110%;
+    .contact-container {
+      flex: 0 1 auto;
+      width: 100%;
+      .message {
+        margin-inline: auto;
+        h2 {
+          transform: scale(1);
+          font-size: 2rem;
+          margin-bottom: 1.5rem;
+        }
+        div {
+          display: none;
+        }
+      }
+      form {
+        margin-bottom: 4rem;
+      }
+      .end-message {
+        width: 90vw !important;
+      }
+    }
+    .right {
+      justify-content: center;
     }
   }
 }
@@ -608,19 +797,33 @@ section {
     }
   }
   #contact {
+    padding-bottom: 0;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0;
+    height: 110%;
     .contact-container {
       flex: 0 1 auto;
-      justify-content: center;
-      align-items: center;
-      .right {
-        height: 14rem;
-      }
-      h2 {
-        font-size: 1.8rem;
-      }
       width: 100%;
+      margin-inline: auto;
+      .message {
+        h2 {
+          transform: scale(1);
+          font-size: 2rem;
+          margin-bottom: 1.5rem;
+        }
+        div {
+          display: none;
+        }
+      }
+      form {
+        margin-bottom: 4rem;
+      }
+      .end-message {
+        width: 90vw !important;
+      }
+    }
+    .right {
+      justify-content: center;
     }
   }
 }
