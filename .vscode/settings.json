@@ -1,6 +1,10 @@
 {
   "cSpell.words": [
     "animejs",
-    "overscroll"
+    "overscroll",
+    "pandown",
+    "panleft",
+    "panright",
+    "panup"
   ]
 }

@@ -52,6 +52,7 @@ export default function BindAllEvents() {
     'touchstart',
     (e) => {
       e.preventDefault();
+      document.activeElement.blur();
       tStartX = e.changedTouches[0].screenX;
       tStartY = e.changedTouches[0].screenY;
     },
@@ -66,6 +67,7 @@ export default function BindAllEvents() {
       tEndY = e.changedTouches[0].screenY;
       if (tEndY === tStartY) {
         e.target.click();
+        e.target.focus();
       } else {
         const dX = tEndX - tStartX;
         const dY = tEndY - tStartY;

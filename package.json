@@ -14,25 +14,26 @@
   "devDependencies": {
     "@babel/preset-env": "^7.18.10",
     "css-loader": "^6.7.1",
-    "eslint": "^8.21.0",
+    "eslint": "^8.22.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
     "html-loader": "^4.1.0",
     "jest": "^28.1.3",
     "normalize.css": "^8.0.1",
     "rfs": "^9.0.6",
-    "sass": "^1.54.3",
+    "sass": "^1.54.4",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.9.3"
+    "webpack-dev-server": "^4.10.0"
   },
   "dependencies": {
     "animejs": "^3.2.1",
     "bootstrap-icons": "^1.9.1",
     "clean-webpack-plugin": "^4.0.0",
     "css-minimizer-webpack-plugin": "^4.0.0",
+    "hammerjs": "^2.0.8",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "webpack-merge": "^5.8.0"
