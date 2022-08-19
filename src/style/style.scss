@@ -4,6 +4,7 @@
 @import '~normalize.css/normalize';
 @import '~rfs/scss';
 @import './constants';
+@import './mixins';
 
 @font-face {
   font-family: 'Kirvy Thin';
@@ -221,117 +222,149 @@ section {
 }
 
 #projects {
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
   width: 100%;
-  gap: 4rem;
-  .project-btn.hidden {
-    display: none;
-  }
-  .wrapper {
-    position: relative;
-    button {
-      cursor: pointer;
-      position: absolute;
-      z-index: 10;
-      top: 50%;
-      height: 100%;
-      background: none;
-      border: none;
-      color: $secondary-font-color;
-      font-size: 1.8rem;
-      width: $projects-grid-peek;
-    }
-    button:nth-of-type(1) {
-      transform: translate(-100%, -50%);
-      // transform: translate(0%, -50%);
-      left: 0;
-    }
-    button:nth-of-type(2) {
-      transform: translate(100%, -50%);
-      // transform: translate(0%, -50%);
-      right: 0;
-    }
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: $projects-grid-peek;
-      height: 100%;
-      background: linear-gradient(
-        to left,
-        rgba(0, 0, 0, 0) 0%,
-        $background-color 100%
-      );
-    }
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: $projects-grid-peek;
-      height: 100%;
-      background: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0) 0%,
-        $background-color 100%
-      );
-    }
-  }
   .project-grid {
-    padding: $projects-spacing $projects-grid-peek;
-    scroll-padding-inline: $projects-grid-peek;
-    scroll-snap-type: inline mandatory;
-    display: grid;
-    grid-auto-flow: column;
+    display: flex;
+    padding-top: math.div($header-height, 2) + 4rem;
+    padding-bottom: 4rem;
+    flex-direction: row;
     gap: $projects-spacing;
-    grid-auto-columns: calc(
-      (100% / $n-projects-visible) -
-        (
-          ($projects-spacing * ($n-projects-visible - 1)) /
-            ($n-projects-visible)
-        )
-    );
-    overflow: auto;
-    overscroll-behavior-inline: contain;
-    -ms-overflow-style: none;
+    height: 100%;
+    .item-wrapper {
+      flex: 1 1 0;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+      &:hover {
+        transform: scale($project-hover-scale);
+        // box-shadow: 0 0 1rem 0 $primary-accent-color;
+        .logo {
+          background-color: $primary-accent-color;
+        }
+        .conama {
+          transform: translateY($project-hover-logo-offset)
+            scale($conama-logo-scale * $project-hover-logo-scale);
+        }
+        .esima {
+          transform: translateY($project-hover-logo-offset)
+            scale($esima-logo-scale * $project-hover-logo-scale);
+        }
+        .waldy {
+          transform: translateY($project-hover-logo-offset)
+            scale($waldy-logo-scale * $project-hover-logo-scale);
+        }
+      }
+    }
     .project-item {
+      height: 100%;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       gap: $projects-text-spacing;
-      scroll-snap-align: start;
       background-color: $item-background-color;
       padding-bottom: $projects-padding;
       img {
         max-width: 100%;
-        // border-radius: 1.2rem;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.1);
       }
-      div {
+      .logo {
+        transition: 0.2s ease-in-out;
+        z-index: 20;
+        background-color: $primary-font-color;
+        height: $projects-logo-height;
+      }
+      .conama {
+        @include logo('../assets/projects/conama/logo.svg');
+        // width: $projects-logo-height *  3.58 !important;
+        transform: translateY($project-logo-offset) scale($conama-logo-scale);
+      }
+      .esima {
+        @include logo('../assets/projects/esima/logo.svg');
+        // width: $projects-logo-height *  4.45 !important;
+        transform: translateY($project-logo-offset) scale($esima-logo-scale);
+      }
+      .waldy {
+        @include logo('../assets/projects/waldy/logo.svg');
+        // width: $projects-logo-height *  1.84 !important;
+        transform: translateY($project-logo-offset) scale($waldy-logo-scale);
+      }
+      .short-description {
+        box-shadow: 0
+            calc(calc($projects-logo-height + $projects-text-spacing) * -1) 7rem
+            4rem $item-background-color,
+          0 calc(calc($projects-logo-height + $projects-text-spacing) * -1) 7rem
+            4rem $item-background-color;
         display: flex;
-        margin-inline: $projects-padding;
-        i {
-          margin-left: math.div($projects-title-font-size, 1.5);
-          font-size: $projects-title-font-size * 0.9;
-          color: $secondary-font-color;
-        }
-      }
-      p {
-        margin-inline: $projects-padding;
-        line-height: $projects-desc-font-size * 1.3;
-      }
-      h3 {
-        margin-right: auto;
-      }
-      h3,
-      div {
-        font-family: Kirvy Bold;
-        font-size: $projects-title-font-size;
-        color: $primary-accent-color;
-      }
-      p {
-        font-family: Kirvy Light;
+        gap: $projects-text-spacing;
+        flex-direction: column;
+        z-index: 10;
         font-size: $projects-desc-font-size;
+        font-family: Kirvy Light;
+        padding-inline: $projects-padding;
+        .actions {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 0.6rem;
+          // margin-top: math.div($projects-text-spacing, 2);
+          button {
+            position: relative;
+            height: 2.5rem;
+            margin-right: auto;
+            background: $input-background-color;
+            border: none;
+            color: $button-content-color;
+            font-family: Kirvy Bold;
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding-inline: 1rem;
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              height: 8%;
+              background-color: $primary-accent-color;
+              z-index: 50;
+              transform: scaleX(0);
+              transition: 0.3s ease-in-out;
+            }
+            &:hover::after {
+              transform: scaleX(1);
+            }
+          }
+          a {
+            position: relative;
+            height: 2.5rem;
+            width: 2.5rem;
+            background: $input-background-color;
+            color: $button-content-color;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              height: 8%;
+              background-color: $primary-accent-color;
+              z-index: 50;
+              transform: scaleX(0);
+              transition: 0.3s ease-in-out;
+            }
+            &:hover::after {
+              transform: scaleX(1);
+            }
+          }
+        }
       }
     }
   }
@@ -647,28 +680,102 @@ section {
       max-width: $bp1-profile-pic-size;
     }
   }
-  #projects .project-grid {
-    padding: $bp1-projects-spacing $bp1-projects-grid-peek;
-    scroll-padding-inline: $bp1-projects-grid-peek;
-    gap: $bp1-projects-spacing;
-    grid-auto-columns: calc(
-      (100% / $bp1-n-projects-visible) -
-        (
-          ($bp1-projects-spacing * ($bp1-n-projects-visible - 1)) /
-            ($bp1-n-projects-visible)
-        )
-    );
-  }
   #projects {
-    .wrapper {
-      button {
-        width: $bp1-projects-grid-peek;
+    padding-inline: 1.5rem;
+    padding-top: $header-height - 2rem;
+    .project-grid {
+      gap: $bp1-projects-spacing;
+      flex-direction: column;
+      padding-block: 1.5rem;
+      width: 100%;
+
+      .project-item {
+        width: 100%;
+
+        flex-direction: row;
+        padding-bottom: 0;
+        position: relative;
+        height: calc(
+          calc(
+              100vh - calc($bp1-projects-spacing * 2) -
+                calc($header-height + 7rem)
+            ) / 3
+        );
+        .logo {
+          width: 100%;
+          position: absolute;
+          top: 60%;
+          left: 50%;
+        }
+        .conama {
+          @include logo('../assets/projects/conama/logo.svg');
+          transform: translate(-50%, -100%) scale($conama-logo-scale * 0.7);
+        }
+        .esima {
+          @include logo('../assets/projects/esima/logo.svg');
+          transform: translate(-50%, -100%) scale($esima-logo-scale * 0.7);
+        }
+        .waldy {
+          @include logo('../assets/projects/waldy/logo.svg');
+          transform: translate(-50%, -100%) scale($waldy-logo-scale * 0.7);
+        }
+        .short-description {
+          p {
+            font-size: 1.1rem;
+            position: absolute;
+            width: 60%;
+            left: 50%;
+            bottom: 10%;
+            text-align: center;
+            transform: translateX(-50%);
+          }
+          .actions {
+            position: absolute;
+            right: $projects-padding;
+            height: 100%;
+            justify-content: center;
+            flex-direction: column;
+            width: min-content;
+            margin-left: auto;
+            margin-block: auto;
+          }
+          width: 100%;
+          background: $item-background-color;
+          box-shadow: calc(
+                calc($projects-logo-height + $projects-text-spacing) * -1
+              )
+              0 7rem 3rem $item-background-color,
+            calc(calc($projects-logo-height + $projects-text-spacing) * -1) 0
+              7rem 3rem $item-background-color;
+          &::before {
+            content: '';
+            background-color: $item-background-color;
+            box-shadow: -1rem 0 1rem 1rem $item-background-color;
+            width: 3.5rem;
+            height: 100%;
+            right: 0;
+            transform: translateX(-100%);
+          }
+        }
       }
-      &::before {
-        width: $bp1-projects-grid-peek;
-      }
-      &::after {
-        width: $bp1-projects-grid-peek;
+      .item-wrapper {
+        width: 100%;
+
+        &:hover {
+          transform: scale($project-hover-scale);
+          .logo {
+            background-color: $primary-accent-color;
+          }
+          .conama {
+            transform: translate(-50%, -100%) scale($conama-logo-scale * 0.8);
+          }
+          .esima {
+            transform: translate(-50%, -100%) scale($esima-logo-scale * 0.8);
+          }
+          .waldy {
+            transform: translate(-50%, -100%) scale($waldy-logo-scale * 0.8);
+          }
+        }
       }
     }
   }
@@ -738,7 +845,6 @@ section {
   #home {
     flex-direction: column;
     justify-content: flex-start;
-    // padding-top: 8rem;
     overflow-x: hidden;
 
     .title {
@@ -759,43 +865,101 @@ section {
       transform: scale(1.25) translate(15%, 10%);
     }
   }
-  #projects .project-grid {
-    padding: $bp2-projects-spacing $bp2-projects-grid-peek;
-    scroll-padding-inline: $bp2-projects-grid-peek;
-    gap: $bp2-projects-spacing;
-    grid-auto-columns: calc(
-      (100% / $bp2-n-projects-visible) -
-        (
-          ($bp2-projects-spacing * ($bp2-n-projects-visible - 1)) /
-            ($bp2-n-projects-visible)
-        )
-    );
-  }
   #projects {
-    .wrapper {
-      button {
-        width: $bp2-projects-grid-peek;
-        background-color: $item-background-color;
-        width: 30%;
-        top: calc(100% + 0.5rem);
-        height: 3.5rem;
+    padding-inline: 1.5rem;
+    padding-top: $header-height - 2rem;
+    .project-grid {
+      gap: $bp2-projects-spacing;
+      flex-direction: column;
+      padding-block: 1.5rem;
+      width: 100%;
+
+      .project-item {
+        width: 100%;
+
+        flex-direction: row;
+        padding-bottom: 0;
+        position: relative;
+        height: calc(
+          calc(
+              100vh - calc($bp2-projects-spacing * 2) -
+                calc($header-height + 7rem)
+            ) / 3
+        );
+        .logo {
+          width: 100%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+        }
+        .conama {
+          @include logo('../assets/projects/conama/logo.svg');
+          transform: translate(-50%, -50%) scale($conama-logo-scale * 0.7);
+        }
+        .esima {
+          @include logo('../assets/projects/esima/logo.svg');
+          transform: translate(-50%, -50%) scale($esima-logo-scale * 0.7);
+        }
+        .waldy {
+          @include logo('../assets/projects/waldy/logo.svg');
+          transform: translate(-50%, -50%) scale($waldy-logo-scale * 0.7);
+        }
+        .short-description {
+          p {
+            display: none;
+          }
+          .actions {
+            position: absolute;
+            right: $projects-padding;
+            height: 100%;
+            justify-content: center;
+            flex-direction: column;
+            width: min-content;
+            margin-left: auto;
+            margin-block: auto;
+          }
+          width: 100%;
+          background: $item-background-color;
+          box-shadow: calc(
+                calc($projects-logo-height + $projects-text-spacing) * -1
+              )
+              0 7rem 3rem $item-background-color,
+            calc(calc($projects-logo-height + $projects-text-spacing) * -1) 0
+              7rem 3rem $item-background-color;
+          position: relative;
+          &::before {
+            content: '';
+            background-color: $item-background-color;
+            box-shadow: -1rem 0 1rem 1rem $item-background-color;
+            width: 3.5rem;
+            height: 100%;
+            right: 0;
+            transform: translateX(-100%);
+          }
+        }
       }
-      button:nth-of-type(1) {
-        transform: translate(-100%, 0);
-        left: calc(50% - 0.5rem);
-      }
-      button:nth-of-type(2) {
-        transform: translate(100%, 0);
-        right: calc(50% - 0.5rem);
-      }
-      &::before {
-        width: $bp2-projects-grid-peek;
-      }
-      &::after {
-        width: $bp2-projects-grid-peek;
+      .item-wrapper {
+        width: 100%;
+
+        &:hover {
+          transform: scale($project-hover-scale);
+          .logo {
+            background-color: $primary-accent-color;
+          }
+          .conama {
+            transform: translate(-50%, -50%) scale($conama-logo-scale * 0.8);
+          }
+          .esima {
+            transform: translate(-50%, -50%) scale($esima-logo-scale * 0.8);
+          }
+          .waldy {
+            transform: translate(-50%, -50%) scale($waldy-logo-scale * 0.8);
+          }
+        }
       }
     }
   }
+
   #contact {
     padding-bottom: 0;
     flex-direction: column;

@@ -38,21 +38,25 @@ $bp1-profile-pic-size: 50%;
 $bp1-about-gap: 0;
 
 // PROJECTS
-$n-projects-visible: 3;
-$projects-spacing: 1.5rem;
-$projects-grid-peek: 4.5rem;
+$projects-spacing: 4rem;
 $projects-padding: 1.2rem;
-$projects-title-font-size: 1.4rem;
-$projects-desc-font-size: 1.03rem;
+$projects-desc-font-size: 1.2rem;
 $projects-text-spacing: 1.2rem;
+$projects-logo-height: 4.2rem;
 
-$bp1-n-projects-visible: 2;
-$bp1-projects-spacing: 1rem;
-$bp1-projects-grid-peek: 3rem;
+$bp1-projects-spacing: 2rem;
+$bp2-projects-spacing: 1.5rem;
 
-$bp2-n-projects-visible: 1;
-$bp2-projects-spacing: 0.5rem;
-$bp2-projects-grid-peek: 2rem;
+$project-logo-offset: -1rem;
+$conama-logo-scale: 1;
+$esima-logo-scale: 0.9;
+$waldy-logo-scale: 1.3;
+$project-hover-scale: 1.05;
+$project-hover-logo-scale: 1.1;
+$project-hover-logo-offset: -1.5rem;
+$project-item-parallax-factor: 450;
+$project-img-parallax-factor: 650;
+
 
 
 $bp1-section-padding: $header-height 2rem 0 2rem;

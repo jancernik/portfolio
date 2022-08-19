@@ -1,0 +1,6 @@
+@mixin logo($url) {
+  -webkit-mask: url($url) no-repeat center ;
+  mask: url($url) no-repeat center ;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}

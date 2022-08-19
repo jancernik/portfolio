@@ -13,4 +13,5 @@ Animate.pageScroll(sections, false);
 Animate.navMarker(btn);
 btn.classList.add('active');
 Style.homePadding();
+Style.projectsParallax();
 BindAllEvents();
