@@ -16,13 +16,13 @@ export default class Style {
 
   static homePadding() {
     if (window.matchMedia(`(max-width: ${scss.bp2})`).matches) {
-      const h = document.getElementById('home');
+      const h = document.getElementById('home-sec');
       const d = document.getElementById('drawing');
       const t = document.querySelector('.title');
       const p = (h.offsetHeight - d.offsetHeight - t.offsetHeight) / 2;
-      document.querySelector('#home').style.paddingTop = `${p}px`;
+      document.querySelector('#home-sec').style.paddingTop = `${p}px`;
     } else {
-      document.querySelector('#home').style.paddingTop = '0';
+      document.querySelector('#home-sec').style.paddingTop = '0';
     }
   }
 

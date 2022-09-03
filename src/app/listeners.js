@@ -93,6 +93,10 @@ export default function BindAllEvents() {
     Handle.resize();
   });
 
+  window.addEventListener('hashchange', () => {
+    Handle.hashCheck();
+  });
+
   window
     .matchMedia('(prefers-color-scheme: dark)')
     .addEventListener('change', (e) => Style.favicon(e.matches));

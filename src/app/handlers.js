@@ -12,6 +12,7 @@ export default class Handle {
       document.querySelector('nav').classList.remove('mobile-active');
       this.changeActiveSection(btn);
       g.currentSection = parseInt(btn.getAttribute('index'), 10);
+      this.updateHash();
       Animate.pageScroll(sections, true);
       Animate.navMarker(btn);
     }
@@ -113,8 +114,10 @@ export default class Handle {
         if (g.scrollEnded) {
           if (e.deltaY < 0 && g.currentSection > 0) {
             g.currentSection -= 1;
+            this.updateHash();
           } else if (e.deltaY > 0 && g.currentSection < sections.length - 1) {
             g.currentSection += 1;
+            this.updateHash();
           }
           const query = `nav [index='${g.currentSection}']`;
           const btn = document.querySelector(query);
@@ -130,6 +133,7 @@ export default class Handle {
     if (dY - c.tolY > 0) {
       if (g.scrollEnded && g.currentSection > 0) {
         g.currentSection -= 1;
+        this.updateHash();
         const btn = document.querySelector(`nav [index='${g.currentSection}']`);
         this.changeActiveSection(btn);
         Animate.pageScroll(sections, true);
@@ -140,12 +144,36 @@ export default class Handle {
     if (dY + c.tolY < 0) {
       if (g.scrollEnded && g.currentSection < sections.length - 1) {
         g.currentSection += 1;
+        this.updateHash();
         const btn = document.querySelector(`nav [index='${g.currentSection}']`);
         this.changeActiveSection(btn);
         Animate.pageScroll(sections, true);
         Animate.navMarker(btn);
       }
     }
+  }
+
+  static hashCheck() {
+    const curHash = window.location.hash;
+    if (curHash === '#home') g.currentSection = 0;
+    else if (curHash === '#about') g.currentSection = 1;
+    else if (curHash === '#projects') g.currentSection = 2;
+    else if (curHash === '#contact') g.currentSection = 3;
+    else {
+      g.currentSection = 0;
+      window.location.hash = 'home';
+    }
+    const btn = document.querySelector(`nav [index='${g.currentSection}']`);
+    this.changeActiveSection(btn);
+    Animate.pageScroll(sections, true);
+    Animate.navMarker(btn);
+  }
+
+  static updateHash() {
+    if (g.currentSection === 0) window.location.hash = 'home';
+    if (g.currentSection === 1) window.location.hash = 'about';
+    if (g.currentSection === 2) window.location.hash = 'projects';
+    if (g.currentSection === 3) window.location.hash = 'contact';
   }
 
   static keyboard(e) {
