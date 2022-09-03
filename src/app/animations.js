@@ -3,10 +3,6 @@ import c from './config';
 import g from './global';
 import scss from '../style/export.module.scss';
 
-let wasMovedRight = false;
-let wasMovedLeft = true;
-let inView = 0;
-
 export default class Animate {
   static drawing(reverse) {
     anime({
@@ -35,36 +31,16 @@ export default class Animate {
     });
   }
 
-  static pScrollLeft(projects) {
-    if (inView > g.nVisible - 1) {
-      document.querySelector('.project-btn.right').classList.remove('hidden');
-      wasMovedLeft = true;
-      inView -= g.nVisible;
-      if (wasMovedRight) {
-        wasMovedRight = false;
-        inView -= g.nVisible - 1;
-      }
-      projects[inView].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-      if (inView === 0) {
-        document.querySelector('.project-btn.left').classList.add('hidden');
-      }
-    }
+  static openProject(target) {
+    const info = document.querySelector(`.info.${target}`);
+    info.style.transition = '0.6s cubic-bezier(0.4, 0, 0.2, 1) 0s';
+    info.classList.remove('hidden');
   }
 
-  static pScrollRight(projects) {
-    if (inView < projects.length - g.nVisible) {
-      document.querySelector('.project-btn.left').classList.remove('hidden');
-      wasMovedRight = true;
-      inView += g.nVisible;
-      if (wasMovedLeft) {
-        wasMovedLeft = false;
-        inView += g.nVisible - 1;
-      }
-      projects[inView].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-      if (inView === projects.length - 1) {
-        document.querySelector('.project-btn.right').classList.add('hidden');
-      }
-    }
+  static closeProjects() {
+    document.querySelectorAll('.info').forEach((element) => {
+      element.classList.add('hidden');
+    });
   }
 
   static navMarker(btn) {

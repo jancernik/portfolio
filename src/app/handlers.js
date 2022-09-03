@@ -4,8 +4,6 @@ import g from './global';
 import c from './config';
 import Get from './logic';
 
-const projectGrid = document.querySelector('.project-grid');
-const projects = document.querySelectorAll('.project-item');
 const sections = document.querySelectorAll('section');
 
 export default class Handle {
@@ -29,12 +27,16 @@ export default class Handle {
     }
   }
 
-  static projectClick(btn) {
-    if (btn.classList.contains('left')) {
-      Animate.pScrollLeft(projects);
-    } else {
-      Animate.pScrollRight(projects);
-    }
+  static projectClick(e) {
+    if (e.target.tagName === 'A' || e.target.tagName === 'I') return;
+    const logo = e.currentTarget.querySelector('.logo');
+    if (logo.classList.contains('conama')) Animate.openProject('conama');
+    if (logo.classList.contains('esima')) Animate.openProject('esima');
+    if (logo.classList.contains('waldy')) Animate.openProject('waldy');
+  }
+
+  static closeProjects() {
+    Animate.closeProjects();
   }
 
   static submit() {
@@ -84,6 +86,27 @@ export default class Handle {
   static scroll(e) {
     // Allow zooming with the Ctrl key
     if (!e.ctrlKey) {
+      // Allow scrolling on projects
+      const infoScreens = [...document.querySelectorAll('.info')];
+      if (!infoScreens.every((i) => !i.contains(e.target))) {
+        const t = document.querySelector('.info:not(.hidden) .content');
+        if (e.deltaY > 0 && t.offsetHeight + t.scrollTop < t.scrollHeight) {
+          if (e.target.classList.contains('content') || t.contains(e.target)) {
+            return;
+          }
+          e.preventDefault();
+          return;
+        }
+        if (e.deltaY < 0 && t.scrollTop > 0) {
+          if (e.target.classList.contains('content') || t.contains(e.target)) {
+            return;
+          }
+          e.preventDefault();
+          return;
+        }
+        e.preventDefault();
+        return;
+      }
       e.preventDefault();
       // Vertical scrolling
       if (!e.shiftKey) {
@@ -99,31 +122,11 @@ export default class Handle {
           Animate.pageScroll(sections, true);
           Animate.navMarker(btn);
         }
-        // Horizontal scrolling
-      } else if (projectGrid.contains(e.target)) {
-        if (e.deltaY < 0) {
-          Animate.pScrollLeft(projects);
-        } else if (e.deltaY > 0) {
-          Animate.pScrollRight(projects);
-        }
       }
     }
   }
 
   static swipe(dX, dY) {
-    // Left
-    if (dX - c.tolX > 0) {
-      if (g.currentSection === 2) {
-        Animate.pScrollLeft(projects);
-      }
-    }
-    // Right
-    if (dX + c.tolX < 0) {
-      if (g.currentSection === 2) {
-        Animate.pScrollRight(projects);
-      }
-    }
-    // Up
     if (dY - c.tolY > 0) {
       if (g.scrollEnded && g.currentSection > 0) {
         g.currentSection -= 1;

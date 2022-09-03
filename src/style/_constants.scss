@@ -1,4 +1,4 @@
-@use "sass:math";
+@use 'sass:math';
 
 $bp1-width: 900px;
 $bp2-width: 500px;
@@ -54,10 +54,9 @@ $waldy-logo-scale: 1.3;
 $project-hover-scale: 1.05;
 $project-hover-logo-scale: 1.1;
 $project-hover-logo-offset: -1.5rem;
-$project-item-parallax-factor: 450;
 $project-img-parallax-factor: 650;
 
-
+$projects-info-logo-height: 3rem;
 
 $bp1-section-padding: $header-height 2rem 0 2rem;
 $bp2-section-padding: math.div($header-height, 1.5) 1rem 0 1rem;

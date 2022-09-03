@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 import Handle from './handlers';
 
 let tStartX = 0;
@@ -34,9 +35,15 @@ export default function BindAllEvents() {
     Handle.menuHover(false);
   });
 
-  document.querySelectorAll('.project-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      Handle.projectClick(btn);
+  document.querySelectorAll('.close-project-info').forEach((item) => {
+    item.addEventListener('click', () => {
+      Handle.closeProjects();
+    });
+  });
+
+  document.querySelectorAll('.project-item').forEach((item) => {
+    item.addEventListener('click', (e) => {
+      Handle.projectClick(e);
     });
   });
 
@@ -45,7 +52,7 @@ export default function BindAllEvents() {
     (e) => {
       Handle.scroll(e);
     },
-    { passive: false },
+    { passive: false }
   );
 
   window.addEventListener(
@@ -56,7 +63,7 @@ export default function BindAllEvents() {
       tStartX = e.changedTouches[0].screenX;
       tStartY = e.changedTouches[0].screenY;
     },
-    { passive: false },
+    { passive: false }
   );
 
   window.addEventListener(
@@ -74,7 +81,7 @@ export default function BindAllEvents() {
         Handle.swipe(dX, dY);
       }
     },
-    { passive: false },
+    { passive: false }
   );
 
   window.addEventListener('keydown', (e) => {

@@ -17,15 +17,14 @@ export default class Style {
   static projectsParallax() {
     window.addEventListener('mousemove', (e) => {
       if (g.currentSection === 2) {
+        const infoScreens = [...document.querySelectorAll('.info')];
+        if (!infoScreens.every((i) => i.classList.contains('hidden'))) return;
         document.querySelectorAll('.project-item').forEach((item) => {
           const imgX = item.getBoundingClientRect().left + item.offsetWidth / 2;
           const imgY = item.getBoundingClientRect().top + item.offsetHeight / 2;
           const img = item.querySelector('img');
           const x = e.clientX - imgX;
           const y = e.clientY - imgY;
-          item.style.transform = `translate(${x / -scss.itemParallax}%, ${
-            y / -scss.itemParallax
-          }%)`;
           img.style.transform = `translate(${x / -scss.imgParallax}%, ${
             y / -scss.imgParallax
           }%) scale(1.1)`;

@@ -52,7 +52,7 @@ header {
   top: 0;
   align-items: center;
   padding-inline: $header-inline-padding;
-  z-index: 20;
+  z-index: 60;
   a {
     padding-block: ($header-element-height - $header-icon-font-size) * 0.5;
     padding-inline: $header-element-inline-padding;
@@ -125,6 +125,7 @@ section {
   width: 100vw;
   height: calc(100vh - calc(100vh - 100%));
   padding: $section-padding;
+  overflow: hidden;
 }
 
 @supports (-moz-appearance: none) {
@@ -222,6 +223,185 @@ section {
 }
 
 #projects {
+  .info {
+    .logo {
+      z-index: 20;
+      background-color: $primary-font-color;
+      height: $projects-info-logo-height;
+      width: fit-content;
+      transform-origin: left;
+      margin-inline: auto;
+    }
+    .conama {
+      @include logo('../assets/projects/conama/logo.svg');
+      transform: translateY($project-logo-offset) scale($conama-logo-scale);
+      width: $projects-info-logo-height * 3.58 !important;
+    }
+
+    .esima {
+      @include logo('../assets/projects/esima/logo.svg');
+      transform: translateY($project-logo-offset) scale($esima-logo-scale);
+      width: $projects-info-logo-height * 4.45 !important;
+    }
+    .waldy {
+      @include logo('../assets/projects/waldy/logo.svg');
+      transform: translateY($project-logo-offset) scale($waldy-logo-scale);
+      width: $projects-info-logo-height * 1.84 !important;
+    }
+    padding-top: math.div($header-height, 2);
+    background: rgba($color: $background-color, $alpha: 0.7);
+    backdrop-filter: blur(20px);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    transform-origin: bottom;
+    // transform: scaleY(1);
+    transform: translateY(0);
+
+    opacity: 1;
+    .bar {
+      position: absolute;
+      top: math.div($header-height, 2) - 1rem;
+      right: 2rem;
+      height: calc(calc(100% - math.div($header-height, 2)) + 1rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      z-index: 150;
+      i {
+        font-size: 1.6rem;
+        width: 1.6rem;
+        height: 1.6rem;
+        margin: 0;
+        padding: 0;
+        transition: transform 0.05s ease-in;
+        position: relative;
+        color: $secondary-font-color;
+        &::after {
+          content: '';
+          position: absolute;
+          width: 3.5rem;
+          height: 3.5rem;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        &:hover {
+          transform: scale(1.4);
+        }
+      }
+      .fa-brands {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+      }
+      .line {
+        height: 100%;
+        width: 2px;
+        background-color: $secondary-font-color;
+      }
+      .close-project-info {
+        width: 2rem;
+        height: 6rem;
+        background: transparent;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        margin-bottom: 4rem;
+        &:hover {
+          &::before {
+            transform: translate(-50%, -50%) rotate(25deg);
+          }
+          &::after {
+            transform: translate(-50%, -50%) rotate(155deg);
+          }
+        }
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          height: 3px;
+          width: 2rem;
+          background: $primary-font-color;
+          left: 50%;
+          top: 50%;
+          transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        &::before {
+          transform: translate(-50%, -50%) rotate(45deg);
+        }
+        &::after {
+          transform: translate(-50%, -50%) rotate(135deg);
+        }
+      }
+    }
+  }
+  .info-header {
+    box-shadow: 0 0 1.5rem 1.5rem $background-color;
+    background: $background-color;
+    z-index: 80;
+    position: relative;
+  }
+  .content {
+    overflow-y: auto !important;
+    display: flex;
+    flex-direction: column;
+    padding-right: 7rem;
+    padding-left: 3rem;
+    height: 100%;
+    padding-top: 2rem;
+    gap: 2rem;
+    padding-bottom: 6rem;
+    .part {
+      display: flex;
+      gap: 4rem;
+    }
+    .img-wrapper {
+      flex: 1 1 0;
+      display: flex;
+      aspect-ratio: 16 / 10;
+      img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 10;
+        object-fit: contain;
+      }
+    }
+    .imgs-wrapper {
+      flex: 1 1 0;
+      display: flex;
+      gap: 3rem;
+      justify-content: flex-end;
+      img {
+        max-width: 40%;
+        width: 40%;
+      }
+    }
+    .text {
+      h3 {
+        font-size: 1.5rem;
+        font-family: Kirvy Bold;
+        margin-top: 0.5rem;
+      }
+      font-size: 1.1rem;
+      gap: 1rem;
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .hidden {
+    // transform: scaleY(0);
+    transform: translateY(100%);
+    opacity: 0;
+  }
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -348,20 +528,11 @@ section {
             align-items: center;
             text-decoration: none;
             font-size: 1.2rem;
-            &::after {
-              content: '';
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              width: 100%;
-              height: 8%;
-              background-color: $primary-accent-color;
-              z-index: 50;
-              transform: scaleX(0);
-              transition: 0.3s ease-in-out;
-            }
-            &:hover::after {
-              transform: scaleX(1);
+            transition: 0.1s ease-in-out;
+            &:hover {
+              box-shadow: 0 0 1rem 0 $background-color;
+              transform: translateY(-0.3rem);
+              color: $primary-accent-color;
             }
           }
         }
