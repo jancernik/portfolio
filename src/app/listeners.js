@@ -1,5 +1,6 @@
 /* eslint-disable comma-dangle */
 import Handle from './handlers';
+import Style from './style';
 
 let tStartX = 0;
 let tStartY = 0;
@@ -91,4 +92,8 @@ export default function BindAllEvents() {
   window.addEventListener('resize', () => {
     Handle.resize();
   });
+
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (e) => Style.favicon(e.matches));
 }

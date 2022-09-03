@@ -2,6 +2,18 @@ import scss from '../style/export.module.scss';
 import g from './global';
 
 export default class Style {
+  static favicon(isDark) {
+    const lightThemeIcon = document.getElementById('light-theme-icon');
+    const darkThemeIcon = document.getElementById('dark-theme-icon');
+    if (isDark) {
+      lightThemeIcon.parentNode.removeChild(lightThemeIcon);
+      document.head.append(darkThemeIcon);
+    } else {
+      darkThemeIcon.parentNode.removeChild(darkThemeIcon);
+      document.head.append(lightThemeIcon);
+    }
+  }
+
   static homePadding() {
     if (window.matchMedia(`(max-width: ${scss.bp2})`).matches) {
       const h = document.getElementById('home');

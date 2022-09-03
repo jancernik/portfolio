@@ -12,6 +12,10 @@ g.nVisible = Get.nProjects();
 Animate.pageScroll(sections, false);
 Animate.navMarker(btn);
 btn.classList.add('active');
-Style.homePadding();
-Style.projectsParallax();
+window.addEventListener('load', () => {
+  Style.favicon(window.matchMedia('(prefers-color-scheme: dark)'));
+  Style.homePadding();
+  Style.projectsParallax();
+});
+
 BindAllEvents();
