@@ -65,6 +65,9 @@ header {
       padding: 0;
     }
   }
+  .cv {
+    font-size: $header-icon-font-size * 0.9;
+  }
   nav {
     margin-left: auto;
     position: relative;
@@ -985,6 +988,9 @@ section {
 @media (max-width: $bp2-width) {
   header {
     nav {
+      display: none;
+    }
+    .cv {
       display: none;
     }
     .hamburger-btn {
