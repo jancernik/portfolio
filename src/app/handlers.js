@@ -8,10 +8,12 @@ const sections = document.querySelectorAll('section');
 
 export default class Handle {
   static menuClick(btn) {
-    if (g.scrollEnded) {
+    const clickedSection = parseInt(btn.getAttribute('index'), 10);
+    if (g.scrollEnded && clickedSection !== g.currentSection) {
       document.querySelector('nav').classList.remove('mobile-active');
       this.changeActiveSection(btn);
-      g.currentSection = parseInt(btn.getAttribute('index'), 10);
+      g.lastSection = g.currentSection;
+      g.currentSection = clickedSection;
       this.updateHash();
       Animate.pageScroll(sections, true);
       Animate.navMarker(btn);
@@ -112,18 +114,25 @@ export default class Handle {
       // Vertical scrolling
       if (!e.shiftKey) {
         if (g.scrollEnded) {
+          let hasChange = false;
           if (e.deltaY < 0 && g.currentSection > 0) {
+            g.lastSection = g.currentSection;
             g.currentSection -= 1;
             this.updateHash();
+            hasChange = true;
           } else if (e.deltaY > 0 && g.currentSection < sections.length - 1) {
+            g.lastSection = g.currentSection;
             g.currentSection += 1;
             this.updateHash();
+            hasChange = true;
           }
-          const query = `nav [index='${g.currentSection}']`;
-          const btn = document.querySelector(query);
-          this.changeActiveSection(btn);
-          Animate.pageScroll(sections, true);
-          Animate.navMarker(btn);
+          if (hasChange) {
+            const query = `nav [index='${g.currentSection}']`;
+            const btn = document.querySelector(query);
+            this.changeActiveSection(btn);
+            Animate.pageScroll(sections, true);
+            Animate.navMarker(btn);
+          }
         }
       }
     }
@@ -132,6 +141,7 @@ export default class Handle {
   static swipe(dX, dY) {
     if (dY - c.tolY > 0) {
       if (g.scrollEnded && g.currentSection > 0) {
+        g.lastSection = g.currentSection;
         g.currentSection -= 1;
         this.updateHash();
         const btn = document.querySelector(`nav [index='${g.currentSection}']`);
@@ -143,6 +153,7 @@ export default class Handle {
     // Down
     if (dY + c.tolY < 0) {
       if (g.scrollEnded && g.currentSection < sections.length - 1) {
+        g.lastSection = g.currentSection;
         g.currentSection += 1;
         this.updateHash();
         const btn = document.querySelector(`nav [index='${g.currentSection}']`);
@@ -154,7 +165,9 @@ export default class Handle {
   }
 
   static hashCheck() {
+    if (g.hashWillChange) return;
     const curHash = window.location.hash;
+    g.lastSection = g.currentSection;
     if (curHash === '#home') g.currentSection = 0;
     else if (curHash === '#about') g.currentSection = 1;
     else if (curHash === '#projects') g.currentSection = 2;
@@ -170,10 +183,14 @@ export default class Handle {
   }
 
   static updateHash() {
+    g.hashWillChange = true;
     if (g.currentSection === 0) window.location.hash = 'home';
     if (g.currentSection === 1) window.location.hash = 'about';
     if (g.currentSection === 2) window.location.hash = 'projects';
     if (g.currentSection === 3) window.location.hash = 'contact';
+    setTimeout(() => {
+      g.hashWillChange = false;
+    }, 400);
   }
 
   static keyboard(e) {

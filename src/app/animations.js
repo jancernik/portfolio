@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import anime from 'animejs/lib/anime.es';
 import c from './config';
 import g from './global';
@@ -5,6 +6,7 @@ import scss from '../style/export.module.scss';
 
 export default class Animate {
   static drawing(reverse) {
+    document.getElementById('drawing').style.opacity = 1;
     anime({
       targets: '#drawing path',
       strokeDashoffset: [anime.setDashoffset, 0],
@@ -20,6 +22,7 @@ export default class Animate {
     const offset = sections[g.currentSection].getBoundingClientRect().top;
     const scrollPos = window.scrollY;
     const documentTop = document.documentElement.clientTop;
+    animate && this.pageDisplay();
     anime({
       targets: [document.documentElement, document.body],
       scrollTop: offset + scrollPos - documentTop,
@@ -29,6 +32,94 @@ export default class Animate {
         g.scrollEnded = true;
       },
     });
+  }
+
+  static pageDisplay() {
+    if (g.currentSection === 0) {
+      this.drawing();
+      const a = document.querySelectorAll('#home-sec h1');
+      const b = document.querySelectorAll('#home-sec h2');
+      const animationTargets = [a, b];
+      animationTargets.forEach((group) => {
+        group.forEach((el) => {
+          el.style.transform = 'translateX(-110%)';
+          el.style.opacity = '1';
+        });
+      });
+      anime({
+        targets: animationTargets,
+        translateX: 0,
+        delay: anime.stagger(250, { start: g.lastSection ? 400 : 0 }),
+        duration: 1400,
+        easing: 'easeOutQuint',
+      });
+    }
+    if (g.currentSection === 1) {
+      const pWrapper = document.querySelector('.p-wrapper');
+      const wrapper = document.querySelector('.wrapper');
+      const profile = document.querySelector('.profile');
+      profile.style.opacity = '1';
+      setTimeout(() => {
+        profile.classList.add('animate');
+        wrapper.style.overflow = 'visible';
+      }, 1300);
+      setTimeout(() => {
+        pWrapper.classList.add('animate');
+      }, 400);
+      profile.style.transform = 'translateX(-110%)';
+      anime({
+        targets: profile,
+        translateX: 'calc(6% + 3px)',
+        delay: 600,
+        duration: 1200,
+        easing: 'easeOutQuint',
+      });
+      const animationTargets = document.querySelectorAll('.p');
+      animationTargets.forEach((el) => {
+        el.style.transform = 'translateX(-110%)';
+      });
+      anime({
+        targets: animationTargets,
+        translateX: 0,
+        delay: anime.stagger(400, { start: 400 }),
+        duration: 1500,
+        easing: 'easeOutQuint',
+      });
+    }
+    if (g.currentSection === 2) {
+      const animationTargets = document.querySelectorAll('.project-item');
+      animationTargets.forEach((el) => {
+        el.style.transform = `translateY(${g.lastSection > 2 ? '-' : ''}40%)`;
+        el.style.opacity = '0';
+      });
+      anime({
+        targets: animationTargets,
+        translateY: 0,
+        opacity: 1,
+        delay: anime.stagger(200, { start: 500 }),
+        duration: 1200,
+        easing: 'easeOutQuint',
+      });
+    }
+    if (g.lastSection === 1) {
+      setTimeout(() => {
+        const pWrapper = document.querySelector('.p-wrapper');
+        const profile = document.querySelector('.profile');
+        const wrapper = document.querySelector('.wrapper');
+        wrapper.style.overflow = 'hidden';
+        pWrapper.classList.remove('animate');
+        profile.classList.remove('animate');
+        profile.style.opacity = '0';
+      }, c.scrollDur);
+    }
+    if (g.lastSection === 2) {
+      setTimeout(() => {
+        const animationTargets = document.querySelectorAll('.project-item');
+        animationTargets.forEach((el) => {
+          el.style.opacity = '0';
+        });
+      }, c.scrollDur);
+    }
   }
 
   static openProject(target) {
@@ -92,12 +183,12 @@ export default class Animate {
   }
 
   static submitEndPositive() {
-    document.querySelector('.submit').style.overflow = 'visible';
+    document.querySelector('.submit').classList.add('end');
     document.querySelector('.submit .positive').classList.add('active');
   }
 
   static submitEndNegative() {
-    document.querySelector('.submit').style.overflow = 'visible';
+    document.querySelector('.submit').classList.add('end');
     document.querySelector('.submit .negative').classList.add('active');
   }
 }

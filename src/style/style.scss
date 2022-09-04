@@ -42,6 +42,7 @@ body {
   font-weight: 900;
   color: $primary-font-color;
   background: $background-color;
+  // background-image: linear-gradient(to right top, $background-color, $background-color-lighter);
 }
 
 header {
@@ -132,6 +133,21 @@ section {
   overflow: hidden;
 }
 
+section:nth-child(odd) {
+  background-image: linear-gradient(
+    to right top,
+    transparent,
+    $background-color-lighter
+  );
+}
+section:nth-child(even) {
+  background-image: linear-gradient(
+    to right bottom,
+    transparent,
+    $background-color-lighter
+  );
+}
+
 @supports (-moz-appearance: none) {
   section:last-of-type {
     height: calc(100vh + calc(100vh - 100%));
@@ -144,25 +160,31 @@ section {
   .title {
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
     h1 {
       margin: 0;
       font-size: $name-title-size;
       text-transform: uppercase;
+      opacity: 0;
     }
     h1:nth-of-type(2) {
       color: $primary-accent-color;
       font-family: Kirvy Bold;
+      opacity: 0;
     }
     h2 {
-      margin: 1rem 0 0 1.4rem;
+      margin: 1rem 0 0 1rem;
       font-family: Kirvy Light;
       font-size: calc($name-title-size * 0.3);
       color: $secondary-font-color;
+      opacity: 0;
     }
   }
   #drawing {
     width: 45%;
     transform: translate(10%, 8%);
+    opacity: 0;
   }
 }
 
@@ -183,33 +205,90 @@ section {
     align-items: center;
     gap: $about-gap;
     display: flex;
+    overflow: hidden;
   }
   .profile {
-    transform: rotate(-5deg);
+    transform: translateX(-110%);
     position: relative;
     flex: 1 1 0;
     max-width: $profile-pic-size;
+    min-width: 12rem;
+    opacity: 0;
     img {
       max-width: 100%;
     }
     &::before {
       content: '';
       position: absolute;
-      top: -$profile-pic-outline-offset;
-      left: -$profile-pic-outline-offset;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 100%;
+      height: calc(100% - $profile-pic-outline-width * 2);
       outline: $profile-pic-outline-width solid $primary-accent-color;
       z-index: -1;
+      transition: 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
     &::after {
       content: '';
       position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: calc(100% - $profile-pic-outline-width * 2);
+      outline: $profile-pic-outline-width solid $primary-font-color;
+      transition: 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  }
+  .profile.animate {
+    &::before {
+      top: -$profile-pic-outline-offset;
+      left: -$profile-pic-outline-offset;
+    }
+    &::after {
       top: $profile-pic-outline-offset;
       left: $profile-pic-outline-offset;
-      width: 100%;
+    }
+  }
+  .p-wrapper {
+    overflow: hidden;
+    position: relative;
+    padding-inline: 1rem;
+    transform-origin: left;
+    transform: scaleX(0);
+
+    &::before {
+      content: '';
+      position: absolute;
       height: 100%;
-      outline: $profile-pic-outline-width solid $primary-font-color;
+      width: 100%;
+      background-color: $primary-accent-color;
+      top: 0;
+      right: 2px;
+      z-index: 10;
+      transform-origin: right;
+      transform: scaleX(1);
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: $item-background-color;
+      top: 0;
+      right: 0;
+      z-index: 20;
+      transform-origin: right;
+      transform: scaleX(1);
+    }
+  }
+  .p-wrapper.animate {
+    animation: pReveal1 0.6s forwards;
+
+    &::before {
+      animation: pReveal2 1.6s forwards;
+    }
+    &::after {
+      animation: pReveal2 1.52s forwards;
     }
   }
   p {
@@ -218,13 +297,35 @@ section {
     line-height: $about-font-size * 1.7;
     font-weight: $about-font-weight;
     font-family: 'Inter', sans-serif;
-    max-width: 80ch;
+    max-width: 70ch;
+    position: relative;
     .p {
       display: flex;
       padding: 0.5rem 0;
       font-family: monospace;
       color: $primary-accent-color;
+      font-weight: 900;
+      overflow: hidden;
+      transform: translateX(-110%);
     }
+  }
+}
+
+@keyframes pReveal1 {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes pReveal2 {
+  25% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
   }
 }
 
@@ -738,7 +839,9 @@ section {
         margin-top: 0.5rem;
         margin-bottom: 1.5rem;
         resize: none;
-        transition: 0.2s ease-in-out;
+        // transition: 0.2s ease-in-out;
+        transform-origin: left;
+        // opacity: 0;
       }
       #message {
         margin-bottom: 0;
@@ -768,7 +871,7 @@ section {
           position: absolute;
           opacity: 0;
           width: 400%;
-          background: $background-color;
+          // background: $background-color;
           transform: scale(
             math.div(1, $form-button-end-scaleY),
             math.div(0.6, $form-button-end-scaleX)
@@ -838,6 +941,15 @@ section {
       .submit.fill {
         &::before {
           transform: scaleX(1);
+        }
+      }
+      .submit.fill.end {
+        transition: none;
+        overflow: visible;
+        background: transparent;
+        &::before {
+          transition: none;
+          background: transparent;
         }
       }
       .content.th {

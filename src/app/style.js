@@ -28,7 +28,7 @@ export default class Style {
 
   static projectsParallax() {
     window.addEventListener('mousemove', (e) => {
-      if (g.currentSection === 2) {
+      if (g.currentSection === 2 && g.scrollEnded) {
         const infoScreens = [...document.querySelectorAll('.info')];
         if (!infoScreens.every((i) => i.classList.contains('hidden'))) return;
         document.querySelectorAll('.project-item').forEach((item) => {
