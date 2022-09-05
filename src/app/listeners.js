@@ -27,10 +27,14 @@ export default function BindAllEvents() {
     Handle.submit();
   });
 
-  document.getElementById('copy-email').addEventListener('click', (e) => {
-    e.currentTarget.classList.add('copied');
+  const emailText = document.querySelector('.email');
+  const emailCopyIcon = document.getElementById('copy-email');
+  const copyEmail = () => {
+    emailCopyIcon.classList.add('copied');
     navigator.clipboard.writeText('jancernik12@gmail.com');
-  });
+  };
+  emailText.addEventListener('click', copyEmail);
+  emailCopyIcon.addEventListener('click', copyEmail);
 
   document.querySelector('nav').addEventListener('mouseout', () => {
     Handle.menuHover(false);

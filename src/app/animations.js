@@ -101,6 +101,80 @@ export default class Animate {
         easing: 'easeOutQuint',
       });
     }
+    if (g.currentSection === 3) {
+      const target = document.querySelector('form');
+      if (!target.classList.contains('animation-ended')) {
+        const targetParent = document.querySelector('.contact-container.right');
+        const btn = document.querySelector('.submit');
+        targetParent.style.overflow = 'hidden';
+        targetParent.style.transform = 'translateY(2rem)';
+        target.style.transform = 'translateX(-110%)';
+        btn.style.transform = 'translate(-50%, 0)';
+        btn.style.zIndex = '-1';
+        anime({
+          targets: target,
+          translateX: '0',
+          delay: 400,
+          duration: 1400,
+          easing: 'easeOutQuint',
+        });
+        const aEl = document.getElementById('name');
+        const bEl = document.getElementById('email');
+        const cEl = document.getElementById('message');
+        const animationTargets = [aEl, bEl, cEl];
+        animationTargets.forEach((el) => {
+          el.style.transform = 'translateX(-120%)';
+        });
+        anime({
+          targets: animationTargets,
+          translateX: 0,
+          delay: anime.stagger(200, { start: 400 }),
+          duration: 900,
+          easing: 'easeOutQuint',
+        });
+        setTimeout(() => {
+          targetParent.style.overflow = 'visible';
+          btn.style.transform = 'translate(-50%, 4rem)';
+          targetParent.style.transform = 'translateY(0)';
+        }, 1400);
+        setTimeout(() => {
+          btn.style.zIndex = '1';
+        }, 2200);
+      } else {
+        target.style.transform = 'scaleY(0)';
+        anime({
+          targets: target,
+          scaleY: 1,
+          delay: 1400,
+          duration: 320,
+          easing: 'easeOutQuint',
+        });
+      }
+      const title = document.querySelector('.message h2 div');
+      const titleParent = document.querySelector('.message h2');
+      titleParent.style.overflow = 'hidden';
+      title.style.transform = 'translateX(-110%)';
+      anime({
+        targets: title,
+        translateX: 0,
+        delay: 400,
+        duration: 1400,
+        easing: 'easeOutQuint',
+      });
+      const text = document.querySelectorAll('.message > div');
+      text.forEach((el) => {
+        el.style.transform = 'translateY(-60%)';
+        el.style.opacity = '0';
+      });
+      anime({
+        targets: text,
+        translateY: 0,
+        opacity: 1,
+        delay: anime.stagger(300, { start: 1400 }),
+        duration: 600,
+        easing: 'easeOutQuint',
+      });
+    }
     if (g.lastSection === 1) {
       setTimeout(() => {
         const pWrapper = document.querySelector('.p-wrapper');
@@ -167,6 +241,7 @@ export default class Animate {
     const formHeight = formContent.getBoundingClientRect().height;
     const submitBtn = document.querySelector('.submit');
     submitBtn.classList.add('clicked');
+    submitBtn.disabled = true;
     formContent.classList.add('th');
     setTimeout(() => {
       formContent.classList.add('tv');
