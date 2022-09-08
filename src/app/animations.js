@@ -192,6 +192,10 @@ export default class Animate {
         animationTargets.forEach((el) => {
           el.style.opacity = '0';
         });
+        const projectInfos = document.querySelectorAll('.info');
+        projectInfos.forEach((el) => {
+          el.classList.add('hidden');
+        });
       }, c.scrollDur);
     }
   }
@@ -200,11 +204,32 @@ export default class Animate {
     const info = document.querySelector(`.info.${target}`);
     info.style.transition = '0.6s cubic-bezier(0.4, 0, 0.2, 1) 0s';
     info.classList.remove('hidden');
+    const line = document.querySelector('.info:not(.hidden) .bar .line');
+    line.style.transform = 'scaleY(0)';
+    const icons = document.querySelectorAll('.info:not(.hidden) i');
+    icons.forEach((el) => {
+      el.style.transform = 'translateX(120%)';
+    });
+    anime({
+      targets: icons,
+      translateX: 0,
+      delay: anime.stagger(150, { start: 600 }),
+      duration: 300,
+      easing: 'easeOutQuad',
+      complete: () => {
+        anime({
+          targets: line,
+          scaleY: 1,
+          duration: 800,
+          easing: 'easeInOutQuart',
+        });
+      },
+    });
   }
 
   static closeProjects() {
-    document.querySelectorAll('.info').forEach((element) => {
-      element.classList.add('hidden');
+    document.querySelectorAll('.info').forEach((el) => {
+      el.classList.add('hidden');
     });
   }
 
