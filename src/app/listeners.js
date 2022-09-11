@@ -60,13 +60,21 @@ export default function BindAllEvents() {
     { passive: false }
   );
 
+  let normalScroll = false;
+
   window.addEventListener(
     'touchstart',
     (e) => {
-      e.preventDefault();
       document.activeElement.blur();
       tStartX = e.changedTouches[0].screenX;
       tStartY = e.changedTouches[0].screenY;
+      const infoScreens = [...document.querySelectorAll('.info')];
+      if (!infoScreens.every((i) => !i.contains(e.target))) {
+        normalScroll = true;
+      } else {
+        normalScroll = false;
+        e.preventDefault();
+      }
     },
     { passive: false }
   );
@@ -74,16 +82,42 @@ export default function BindAllEvents() {
   window.addEventListener(
     'touchend',
     (e) => {
-      e.preventDefault();
       tEndX = e.changedTouches[0].screenX;
       tEndY = e.changedTouches[0].screenY;
-      if (tEndY === tStartY) {
-        e.target.click();
-        e.target.focus();
-      } else {
-        const dX = tEndX - tStartX;
-        const dY = tEndY - tStartY;
-        Handle.swipe(dX, dY);
+      const dX = tEndX - tStartX;
+      const dY = tEndY - tStartY;
+      if (!normalScroll) {
+        e.preventDefault();
+        if (tEndY === tStartY) {
+          e.target.click();
+          e.target.focus();
+        } else {
+          Handle.swipe(dX, dY);
+        }
+      }
+    },
+    { passive: false }
+  );
+
+  window.addEventListener(
+    'touchmove',
+    (e) => {
+      tEndX = e.changedTouches[0].screenX;
+      tEndY = e.changedTouches[0].screenY;
+      const dY = tEndY - tStartY;
+      if (normalScroll) {
+        const t = document.querySelector('.info:not(.hidden) .content');
+        if (dY < 0 && t.offsetHeight + t.scrollTop < t.scrollHeight) {
+          if (e.target.classList.contains('content') || t.contains(e.target)) {
+            return;
+          }
+        }
+        if (dY > 0 && t.scrollTop > 0) {
+          if (e.target.classList.contains('content') || t.contains(e.target)) {
+            return;
+          }
+        }
+        e.preventDefault();
       }
     },
     { passive: false }

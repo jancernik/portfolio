@@ -198,6 +198,7 @@ section:nth-child(even) {
 }
 
 #about-sec {
+  padding-top: math.div($header-height, 2);
   justify-content: center;
   align-items: center;
   margin: 0;
@@ -376,15 +377,16 @@ section:nth-child(even) {
     opacity: 1;
     .bar {
       position: absolute;
-      top: math.div($header-height, 2) - 1rem;
+      top: math.div($header-height, 2) - 0.5rem;
       right: 2rem;
       height: calc(calc(100% - math.div($header-height, 2)) + 1rem);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
       z-index: 150;
       overflow: hidden;
+      gap: 4rem;
+
       i {
         font-size: 1.6rem;
         width: 1.6rem;
@@ -406,15 +408,21 @@ section:nth-child(even) {
         background-color: $secondary-font-color;
         transform-origin: top;
       }
+      .tec {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        gap: 1rem;
+      }
       .close-project-info {
         width: 2rem;
-        height: 6rem;
+        height: 2rem;
         background: transparent;
         color: #fff;
         border: none;
         cursor: pointer;
         position: relative;
-        margin-bottom: 4rem;
         &:hover {
           &::before {
             transform: translate(-50%, -50%) rotate(25deg);
@@ -508,11 +516,10 @@ section:nth-child(even) {
       flex-direction: column;
       p {
         font-family: 'Inter', sans-serif;
-          font-size: 1.05rem;
-          line-height: 1.1rem * 1.5;
-          font-weight: 400;
-
-        }
+        font-size: 1.05rem;
+        line-height: 1.1rem * 1.5;
+        font-weight: 400;
+      }
     }
   }
   .hidden {
@@ -524,7 +531,7 @@ section:nth-child(even) {
   width: 100%;
   .project-grid {
     display: flex;
-    padding-top: math.div($header-height, 2) + 4rem;
+    padding-top: math.div($header-height, 2) + 5rem;
     padding-bottom: 4rem;
     flex-direction: row;
     gap: $projects-spacing;
@@ -983,8 +990,19 @@ section:nth-child(even) {
     }
   }
   #projects-sec {
+    .info {
+      .content {
+        gap: 2rem;
+        padding-right: 6rem;
+        padding-left: 2rem;
+        .part {
+          gap: 2rem;
+          flex-direction: column;
+        }
+      }
+    }
     padding-inline: 1.5rem;
-    padding-top: $header-height - 2rem;
+    padding-top: $header-height - 1rem;
     .project-grid {
       gap: $bp1-projects-spacing;
       flex-direction: column;
@@ -1100,7 +1118,7 @@ section:nth-child(even) {
             transform: translateX(-110%);
           }
         }
-        div {
+        > div {
           display: none;
         }
       }
@@ -1174,9 +1192,31 @@ section:nth-child(even) {
       transform: scale(1.25) translate(15%, 10%);
     }
   }
+  #about-sec .wrapper {
+    .profile {
+      display: none;
+    }
+  }
   #projects-sec {
+    .info {
+      .content {
+        gap: 1rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        .part {
+          gap: 1rem;
+          flex-direction: column;
+        }
+      }
+      .bar {
+        height: fit-content;
+        .tec {
+          display: none;
+        }
+      }
+    }
     padding-inline: 1.5rem;
-    padding-top: $header-height - 2rem;
+    padding-top: $header-height - 1rem;
     .project-grid {
       gap: $bp2-projects-spacing;
       flex-direction: column;
@@ -1272,10 +1312,9 @@ section:nth-child(even) {
   #contact-sec {
     padding-bottom: 0;
     flex-direction: column;
-    gap: 0;
+    gap: 1rem;
     height: 110%;
     .contact-container {
-      flex: 0 1 auto;
       width: 100%;
       margin-inline: auto;
       .message {
@@ -1284,7 +1323,7 @@ section:nth-child(even) {
           font-size: 2rem;
           margin-bottom: 1.5rem;
         }
-        div {
+        > div {
           display: none;
         }
       }

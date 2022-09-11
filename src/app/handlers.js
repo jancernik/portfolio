@@ -139,6 +139,7 @@ export default class Handle {
   }
 
   static swipe(dX, dY) {
+    // Up
     if (dY - c.tolY > 0) {
       if (g.scrollEnded && g.currentSection > 0) {
         g.lastSection = g.currentSection;
