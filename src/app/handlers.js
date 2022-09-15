@@ -2,7 +2,6 @@ import Animate from './animations';
 import Style from './style';
 import g from './global';
 import c from './config';
-import Get from './logic';
 
 const sections = document.querySelectorAll('section');
 
@@ -147,7 +146,7 @@ export default class Handle {
     }
   }
 
-  static swipe(dX, dY) {
+  static swipe(dY) {
     // Up
     if (dY - c.tolY > 0) {
       if (g.scrollEnded && g.currentSection > 0) {
@@ -297,12 +296,10 @@ export default class Handle {
         Animate.pageScroll(sections, false);
         Animate.navMarker(btn);
       }
-      // e.target.closest('section');
     }
   }
 
   static resize() {
-    g.nVisible = Get.nProjects();
     Animate.pageScroll(sections, false);
     Style.homePadding();
   }

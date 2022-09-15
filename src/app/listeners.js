@@ -2,9 +2,7 @@
 import Handle from './handlers';
 import Style from './style';
 
-let tStartX = 0;
 let tStartY = 0;
-let tEndX = 0;
 let tEndY = 0;
 
 export default function BindAllEvents() {
@@ -74,7 +72,6 @@ export default function BindAllEvents() {
     'touchstart',
     (e) => {
       document.activeElement.blur();
-      tStartX = e.changedTouches[0].screenX;
       tStartY = e.changedTouches[0].screenY;
       const infoScreens = [...document.querySelectorAll('.info')];
       if (!infoScreens.every((i) => !i.contains(e.target))) {
@@ -90,9 +87,7 @@ export default function BindAllEvents() {
   window.addEventListener(
     'touchend',
     (e) => {
-      tEndX = e.changedTouches[0].screenX;
       tEndY = e.changedTouches[0].screenY;
-      const dX = tEndX - tStartX;
       const dY = tEndY - tStartY;
       if (!normalScroll) {
         e.preventDefault();
@@ -100,7 +95,7 @@ export default function BindAllEvents() {
           e.target.click();
           e.target.focus();
         } else {
-          Handle.swipe(dX, dY);
+          Handle.swipe(dY);
         }
       }
     },
@@ -110,7 +105,6 @@ export default function BindAllEvents() {
   window.addEventListener(
     'touchmove',
     (e) => {
-      tEndX = e.changedTouches[0].screenX;
       tEndY = e.changedTouches[0].screenY;
       const dY = tEndY - tStartY;
       if (normalScroll) {
