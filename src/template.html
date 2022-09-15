@@ -26,13 +26,19 @@
   </head>
   <body>
     <header>
-      <a href="https://github.com/cernikkk" target="_blank"
+      <a href="https://github.com/cernikkk" target="_blank" tabindex="0"
         ><i class="bi bi-github"></i
       ></a>
-      <a href="https://twitter.com/cernikkk" target="_blank"
+      <a href="https://twitter.com/cernikkk" target="_blank" tabindex="0"
         ><i class="bi bi-twitter"></i
       ></a>
-      <a href="https://cv.jancernik.com#en" target="_blank" class="cv">CV</a>
+      <a
+        href="https://cv.jancernik.com#en"
+        target="_blank"
+        tabindex="0"
+        class="cv"
+        >CV</a
+      >
       <nav>
         <ul>
           <li><button index="0" class="section-btn">HOME</button></li>
@@ -46,7 +52,7 @@
       <i class="bi bi-list hamburger-btn"></i>
     </header>
     <div class="container">
-      <section id="home-sec">
+      <section index="0" id="home-sec">
         <div class="title">
           <div>
             <h1>Jan</h1>
@@ -331,7 +337,7 @@
         <i class="bi bi-arrow-down"></i>
       </section>
 
-      <section id="about-sec">
+      <section index="1" id="about-sec">
         <div class="wrapper">
           <div class="profile">
             <img src="./assets/images/profile.jpg" alt="profile" />
@@ -351,13 +357,13 @@
         </div>
       </section>
 
-      <section id="projects-sec">
+      <section index="2" id="projects-sec">
         <div class="conama info hidden">
           <div class="info-header">
             <div class="conama logo"></div>
           </div>
           <div class="bar">
-            <button class="close-project-info"></button>
+            <button class="close-project-info" tabindex="-1"></button>
             <div class="tec">
               <i class="devicon-react-original"></i>
               <i class="devicon-nodejs-plain"></i>
@@ -441,7 +447,7 @@
             <div class="esima logo"></div>
           </div>
           <div class="bar">
-            <button class="close-project-info"></button>
+            <button class="close-project-info" tabindex="-1"></button>
             <div class="tec">
               <i class="devicon-arduino-plain"></i>
               <i class="devicon-cplusplus-plain"></i>
@@ -526,7 +532,7 @@
             <div class="waldy logo"></div>
           </div>
           <div class="bar">
-            <button class="close-project-info"></button>
+            <button class="close-project-info" tabindex="-1"></button>
             <div class="tec">
               <i class="devicon-sass-original"></i>
               <i class="devicon-javascript-plain"></i>
@@ -595,16 +601,22 @@
         </div>
         <div class="project-grid">
           <div class="item-wrapper">
-            <div class="project-item">
+            <div class="project-item" tabindex="0">
               <img src="./assets/projects/conama/main.jpg" alt="" />
               <div class="conama logo"></div>
               <div class="short-description">
                 <p>A database for the National Chorus of Argentinian Music.</p>
                 <div class="actions">
-                  <a href="https://github.com/ConamaArchivo" target="_blank"
+                  <a
+                    href="https://github.com/ConamaArchivo"
+                    target="_blank"
+                    tabindex="0"
                     ><i class="bi bi-github"></i
                   ></a>
-                  <a href="https://conama.netlify.app" target="_blank"
+                  <a
+                    href="https://conama.netlify.app"
+                    target="_blank"
+                    tabindex="0"
                     ><i class="bi bi-box-arrow-up-right"></i
                   ></a>
                 </div>
@@ -612,7 +624,7 @@
             </div>
           </div>
           <div class="item-wrapper">
-            <div class="project-item">
+            <div class="project-item" tabindex="0">
               <img src="./assets/projects/esima/main.jpg" alt="" />
               <div class="esima logo"></div>
               <div class="short-description">
@@ -620,7 +632,10 @@
                   A prototype of a wireless thrust stand for brushless motors.
                 </p>
                 <div class="actions">
-                  <a href="https://github.com/Proyecto-PP-ET28" target="_blank"
+                  <a
+                    href="https://github.com/Proyecto-PP-ET28"
+                    target="_blank"
+                    tabindex="0"
                     ><i class="bi bi-github"></i
                   ></a>
                 </div>
@@ -628,16 +643,22 @@
             </div>
           </div>
           <div class="item-wrapper">
-            <div class="project-item">
+            <div class="project-item" tabindex="0">
               <img src="./assets/projects/waldy/main.jpg" alt="" />
               <div class="waldy logo"></div>
               <div class="short-description">
                 <p>An online version of the classic 'Where's Waldo?' game.</p>
                 <div class="actions">
-                  <a href="https://github.com/cernikkk/waldy" target="_blank"
+                  <a
+                    href="https://github.com/cernikkk/waldy"
+                    target="_blank"
+                    tabindex="0"
                     ><i class="bi bi-github"></i
                   ></a>
-                  <a href="https://waldy-361d1.web.app" target="_blank"
+                  <a
+                    href="https://waldy-361d1.web.app"
+                    target="_blank"
+                    tabindex="0"
                     ><i class="bi bi-box-arrow-up-right"></i
                   ></a>
                 </div>
@@ -647,7 +668,7 @@
         </div>
       </section>
 
-      <section id="contact-sec">
+      <section index="3" id="contact-sec">
         <div class="contact-container left">
           <div class="message">
             <h2><div>Let's make something awesome!</div></h2>
@@ -685,7 +706,7 @@
                       />
                     </svg>
                   </button>
-                  <a href="mailto:jancernik12@gmail.com"
+                  <a href="mailto:jancernik12@gmail.com" tabindex="0"
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -714,6 +735,7 @@
               <input type="hidden" name="_redirect" value="false" />
               <label for="name">Name</label>
               <input
+                class="form-input"
                 type="text"
                 id="name"
                 name="name"
@@ -722,6 +744,7 @@
               />
               <label for="email">Email address</label>
               <input
+                class="form-input"
                 type="email"
                 name="email"
                 id="email"
@@ -730,6 +753,7 @@
               />
               <label for="message">Message</label>
               <textarea
+                class="form-input"
                 id="message"
                 name="message"
                 placeholder="Write something..."

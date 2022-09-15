@@ -68,6 +68,8 @@ header {
   }
   .cv {
     font-size: $header-icon-font-size * 0.9;
+    padding-block: ($header-element-height - $header-icon-font-size) * 0.5 +
+      $header-icon-font-size * 0.1;
     font-family: Kirvy Bold;
   }
   nav {
@@ -783,12 +785,18 @@ section:nth-child(even) {
           }
         }
       }
-      .email:hover {
+      .email:hover, .email:focus-within {
+
         .email-actions {
           pointer-events: all;
           opacity: 1;
           transform: translate(30%, -45%);
         }
+      }
+      .email-actions:focus {
+        pointer-events: all;
+        opacity: 1;
+        transform: translate(30%, -45%);
       }
       div:last-child {
         width: fit-content;

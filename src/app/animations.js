@@ -5,14 +5,14 @@ import g from './global';
 import scss from '../style/export.module.scss';
 
 export default class Animate {
-  static drawing(reverse) {
+  static drawing(animate, reverse) {
     document.getElementById('drawing').style.opacity = 1;
     anime({
       targets: '#drawing path',
       strokeDashoffset: [anime.setDashoffset, 0],
       easing: 'easeInOutSine',
-      duration: c.drawingAnimDur,
-      delay: anime.stagger(c.drawingPathDelay),
+      duration: animate ? c.drawingAnimDur : 0,
+      delay: animate ? anime.stagger(c.drawingPathDelay) : 0,
       direction: reverse ? 'reverse' : null,
     });
   }
@@ -22,7 +22,7 @@ export default class Animate {
     const offset = sections[g.currentSection].getBoundingClientRect().top;
     const scrollPos = window.scrollY;
     const documentTop = document.documentElement.clientTop;
-    animate && this.pageDisplay();
+    this.pageDisplay(animate);
     anime({
       targets: [document.documentElement, document.body],
       scrollTop: offset + scrollPos - documentTop,
@@ -34,9 +34,9 @@ export default class Animate {
     });
   }
 
-  static pageDisplay() {
+  static pageDisplay(animate) {
     if (g.currentSection === 0) {
-      this.drawing();
+      this.drawing(animate);
       const a = document.querySelectorAll('#home-sec h1');
       const b = document.querySelectorAll('#home-sec h2');
       const animationTargets = [a, b];
@@ -49,8 +49,10 @@ export default class Animate {
       anime({
         targets: animationTargets,
         translateX: 0,
-        delay: anime.stagger(250, { start: g.lastSection ? 400 : 0 }),
-        duration: 1400,
+        delay: animate
+          ? anime.stagger(250, { start: g.lastSection ? 400 : 0 })
+          : 0,
+        duration: animate ? 1400 : 0,
         easing: 'easeOutQuint',
       });
     }
@@ -70,8 +72,8 @@ export default class Animate {
       anime({
         targets: profile,
         translateX: 'calc(6% + 3px)',
-        delay: 600,
-        duration: 1200,
+        delay: animate ? 600 : 0,
+        duration: animate ? 1200 : 0,
         easing: 'easeOutQuint',
       });
       const animationTargets = document.querySelectorAll('.p');
@@ -81,8 +83,8 @@ export default class Animate {
       anime({
         targets: animationTargets,
         translateX: 0,
-        delay: anime.stagger(400, { start: 400 }),
-        duration: 1500,
+        delay: animate ? anime.stagger(400, { start: 400 }) : 0,
+        duration: animate ? 1500 : 0,
         easing: 'easeOutQuint',
       });
     }
@@ -96,8 +98,8 @@ export default class Animate {
         targets: animationTargets,
         translateY: 0,
         opacity: 1,
-        delay: anime.stagger(200, { start: 500 }),
-        duration: 1200,
+        delay: animate ? anime.stagger(200, { start: 500 }) : 0,
+        duration: animate ? 1200 : 0,
         easing: 'easeOutQuint',
       });
     }
@@ -114,8 +116,8 @@ export default class Animate {
         anime({
           targets: target,
           translateX: '0',
-          delay: 400,
-          duration: 1400,
+          delay: animate ? 400 : 0,
+          duration: animate ? 1400 : 0,
           easing: 'easeOutQuint',
         });
         const aEl = document.getElementById('name');
@@ -128,15 +130,26 @@ export default class Animate {
         anime({
           targets: animationTargets,
           translateX: 0,
-          delay: anime.stagger(200, { start: 400 }),
-          duration: 900,
+          delay: animate ? anime.stagger(200, { start: 400 }) : 0,
+          duration: animate ? 900 : 0,
           easing: 'easeOutQuint',
         });
-        setTimeout(() => {
+        if (animate) {
+          setTimeout(() => {
+            const t = 'transform 800ms cubic-bezier(0.87, 0.07, 0.28, 1.01)';
+            targetParent.style.transition = t;
+            btn.style.transition = t;
+            targetParent.style.overflow = 'visible';
+            btn.style.transform = 'translate(-50%, 4rem)';
+            targetParent.style.transform = 'translateY(0)';
+          }, 1400);
+        } else {
+          targetParent.style.transition = 'none';
+          btn.style.transition = 'none';
           targetParent.style.overflow = 'visible';
           btn.style.transform = 'translate(-50%, 4rem)';
           targetParent.style.transform = 'translateY(0)';
-        }, 1400);
+        }
         setTimeout(() => {
           btn.style.zIndex = '1';
         }, 2200);
@@ -145,8 +158,8 @@ export default class Animate {
         anime({
           targets: target,
           scaleY: 1,
-          delay: 1400,
-          duration: 320,
+          delay: animate ? 1400 : 0,
+          duration: animate ? 320 : 0,
           easing: 'easeOutQuint',
         });
       }
@@ -157,8 +170,8 @@ export default class Animate {
       anime({
         targets: title,
         translateX: 0,
-        delay: 400,
-        duration: 1400,
+        delay: animate ? 400 : 0,
+        duration: animate ? 1400 : 0,
         easing: 'easeOutQuint',
       });
       const text = document.querySelectorAll('.message > div');
@@ -170,8 +183,8 @@ export default class Animate {
         targets: text,
         translateY: 0,
         opacity: 1,
-        delay: anime.stagger(300, { start: 1400 }),
-        duration: 600,
+        delay: animate ? anime.stagger(300, { start: 1400 }) : 0,
+        duration: animate ? 600 : 0,
         easing: 'easeOutQuint',
       });
     }
@@ -202,6 +215,7 @@ export default class Animate {
 
   static openProject(target) {
     const info = document.querySelector(`.info.${target}`);
+    info.querySelector('.close-project-info').tabindex = 0;
     info.style.transition = '0.6s cubic-bezier(0.4, 0, 0.2, 1) 0s';
     info.classList.remove('hidden');
     const line = document.querySelector('.info:not(.hidden) .bar .line');
@@ -229,6 +243,7 @@ export default class Animate {
 
   static closeProjects() {
     document.querySelectorAll('.info').forEach((el) => {
+      el.querySelector('.close-project-info').tabindex = -1;
       el.classList.add('hidden');
     });
   }

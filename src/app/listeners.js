@@ -123,6 +123,10 @@ export default function BindAllEvents() {
     { passive: false }
   );
 
+  document.addEventListener('focusin', (e) => {
+    Handle.focus(e);
+  });
+
   window.addEventListener('keydown', (e) => {
     Handle.keyboard(e);
   });

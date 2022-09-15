@@ -195,29 +195,53 @@ export default class Handle {
   }
 
   static keyboard(e) {
-    if (e.key === ' ' && document.activeElement.tagName === 'BODY') {
-      e.preventDefault();
-      if (g.scrollEnded) {
-        let hasChange = false;
-        if (e.shiftKey && g.currentSection > 0) {
-          g.lastSection = g.currentSection;
-          g.currentSection -= 1;
-          this.updateHash();
-          hasChange = true;
-        } else if (!e.shiftKey && g.currentSection < sections.length - 1) {
-          g.lastSection = g.currentSection;
-          g.currentSection += 1;
-          hasChange = true;
-          this.updateHash();
+    if (e.key === ' ') {
+      const tag = document.activeElement.tagName;
+      if (tag === 'BODY' || tag === 'A') {
+        e.preventDefault();
+        if (g.scrollEnded) {
+          let hasChange = false;
+          if (e.shiftKey && g.currentSection > 0) {
+            g.lastSection = g.currentSection;
+            g.currentSection -= 1;
+            this.updateHash();
+            hasChange = true;
+          } else if (!e.shiftKey && g.currentSection < sections.length - 1) {
+            g.lastSection = g.currentSection;
+            g.currentSection += 1;
+            hasChange = true;
+            this.updateHash();
+          }
+          if (hasChange) {
+            const query = `nav [index='${g.currentSection}']`;
+            const btn = document.querySelector(query);
+            this.changeActiveSection(btn);
+            Animate.pageScroll(sections, true);
+            Animate.navMarker(btn);
+          }
         }
-        if (hasChange) {
-          const query = `nav [index='${g.currentSection}']`;
-          const btn = document.querySelector(query);
-          this.changeActiveSection(btn);
-          Animate.pageScroll(sections, true);
-          Animate.navMarker(btn);
-        }
+      } else if (tag === 'DIV') {
+        e.preventDefault();
+        document.activeElement.click();
       }
+    }
+  }
+
+  static focus(e) {
+    const parentSection = e.target.closest('section');
+    if (parentSection !== null) {
+      const sectionIndex = parseInt(parentSection.getAttribute('index'), 10);
+      if (sectionIndex !== g.currentSection) {
+        const query = `nav [index='${sectionIndex}']`;
+        const btn = document.querySelector(query);
+        this.changeActiveSection(btn);
+        g.lastSection = g.currentSection;
+        g.currentSection = sectionIndex;
+        this.updateHash();
+        Animate.pageScroll(sections, false);
+        Animate.navMarker(btn);
+      }
+      // e.target.closest('section');
     }
   }
 
