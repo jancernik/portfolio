@@ -65,6 +65,12 @@ header {
       margin: 0;
       padding: 0;
     }
+    transition: 0.1s ease-in-out;
+    &:hover {
+      box-shadow: 0 0 1rem 0 $background-color;
+      transform: translateY(-0.3rem);
+      color: $primary-accent-color;
+    }
   }
   .cv {
     font-size: $header-icon-font-size * 0.9;
