@@ -237,6 +237,42 @@ export default class Handle {
         document.activeElement.click();
       }
     }
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+      const tag = document.activeElement.tagName;
+      if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+        e.preventDefault();
+        const isUp = e.key === 'ArrowUp';
+        const t = document.querySelector('.info:not(.hidden) .content');
+        if (t) {
+          if (!isUp && t.offsetHeight + t.scrollTop < t.scrollHeight) {
+            t.scrollTo({ top: t.scrollTop + 120, behavior: 'smooth' });
+          }
+          if (isUp && t.scrollTop > 0) {
+            t.scrollTo({ top: t.scrollTop - 120, behavior: 'smooth' });
+          }
+        } else if (g.scrollEnded) {
+          let hasChange = false;
+          if (isUp && g.currentSection > 0) {
+            g.lastSection = g.currentSection;
+            g.currentSection -= 1;
+            this.updateHash();
+            hasChange = true;
+          } else if (!isUp && g.currentSection < sections.length - 1) {
+            g.lastSection = g.currentSection;
+            g.currentSection += 1;
+            hasChange = true;
+            this.updateHash();
+          }
+          if (hasChange) {
+            const query = `nav [index='${g.currentSection}']`;
+            const btn = document.querySelector(query);
+            this.changeActiveSection(btn);
+            Animate.pageScroll(sections, true);
+            Animate.navMarker(btn);
+          }
+        }
+      }
+    }
   }
 
   static focus(e) {
