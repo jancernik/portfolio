@@ -7,11 +7,11 @@ import Handle from './app/handlers';
 const sections = document.querySelectorAll('section');
 const btn = document.querySelector('nav [index="0"]');
 
-Animate.pageScroll(sections, false);
 Animate.navMarker(btn);
 btn.classList.add('active');
 window.addEventListener('load', () => {
   Style.favicon(window.matchMedia('(prefers-color-scheme: dark)'));
+  Animate.pageScroll(sections, false);
   Handle.hashCheck();
 });
 Style.homePadding();
