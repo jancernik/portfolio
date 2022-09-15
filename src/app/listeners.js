@@ -52,6 +52,14 @@ export default function BindAllEvents() {
     });
   });
 
+  document.getElementById('drawing').addEventListener('mouseenter', () => {
+    Handle.showDrawingCredits();
+  });
+
+  document.getElementById('drawing').addEventListener('mouseout', () => {
+    Handle.hideDrawingCredits();
+  });
+
   window.addEventListener(
     'wheel',
     (e) => {

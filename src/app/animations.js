@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable no-unused-expressions */
 import anime from 'animejs/lib/anime.es';
 import c from './config';
@@ -15,6 +16,28 @@ export default class Animate {
       delay: animate ? anime.stagger(c.drawingPathDelay) : 0,
       direction: reverse ? 'reverse' : null,
     });
+  }
+
+  static showDrawingCredits() {
+    if (!window.matchMedia(`(max-width: ${scss.bp2})`).matches) {
+      document.querySelector('.credits').style.opacity = '1';
+      const letters = document.querySelector('.credits .letters');
+      letters.innerHTML = letters.textContent.replace(
+        /\S/g,
+        "<span class='letter'>$&</span>"
+      );
+      anime({
+        targets: '#drawing .letter',
+        translateY: ['1.1em', 0],
+        easing: 'easeInOutQuint',
+        duration: 600,
+        delay: anime.stagger(15, { start: 400 }),
+      });
+    }
+  }
+
+  static hideDrawingCredits() {
+    document.querySelector('.credits').style.opacity = '0';
   }
 
   static pageScroll(sections, animate) {

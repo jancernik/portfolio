@@ -30,6 +30,14 @@ export default class Handle {
     }
   }
 
+  static showDrawingCredits() {
+    Animate.showDrawingCredits();
+  }
+
+  static hideDrawingCredits() {
+    Animate.hideDrawingCredits();
+  }
+
   static projectClick(e) {
     if (e.target.tagName === 'A' || e.target.tagName === 'I') return;
     const logo = e.currentTarget.querySelector('.logo');
