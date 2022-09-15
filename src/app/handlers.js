@@ -195,12 +195,29 @@ export default class Handle {
   }
 
   static keyboard(e) {
-    if (e.key === ' ') {
-      // e.preventDefault();
-      // if (g.scrollEnded && g.currentSection < sections.length - 1) {
-      //   g.currentSection += 1;
-      //   Animate.pageScroll(sections, true);
-      // }
+    if (e.key === ' ' && document.activeElement.tagName === 'BODY') {
+      e.preventDefault();
+      if (g.scrollEnded) {
+        let hasChange = false;
+        if (e.shiftKey && g.currentSection > 0) {
+          g.lastSection = g.currentSection;
+          g.currentSection -= 1;
+          this.updateHash();
+          hasChange = true;
+        } else if (!e.shiftKey && g.currentSection < sections.length - 1) {
+          g.lastSection = g.currentSection;
+          g.currentSection += 1;
+          hasChange = true;
+          this.updateHash();
+        }
+        if (hasChange) {
+          const query = `nav [index='${g.currentSection}']`;
+          const btn = document.querySelector(query);
+          this.changeActiveSection(btn);
+          Animate.pageScroll(sections, true);
+          Animate.navMarker(btn);
+        }
+      }
     }
   }
 
