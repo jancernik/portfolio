@@ -674,6 +674,10 @@ section:nth-child(even) {
   }
 }
 
+p a{
+  color: $primary-accent-color
+}
+
 #contact-sec {
   justify-content: center;
   align-items: center;
