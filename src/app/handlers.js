@@ -36,6 +36,7 @@ export default class Handle {
     if (logo.classList.contains('conama')) Animate.openProject('conama');
     if (logo.classList.contains('esima')) Animate.openProject('esima');
     if (logo.classList.contains('waldy')) Animate.openProject('waldy');
+    document.activeElement.blur();
   }
 
   static closeProjects() {
@@ -195,6 +196,17 @@ export default class Handle {
   }
 
   static keyboard(e) {
+    if (e.key === 'Tab') {
+      const btn = document.querySelector('.info:not(.hidden) button');
+      if (btn) {
+        e.preventDefault();
+        if (document.activeElement === btn) {
+          btn.blur();
+        } else {
+          btn.focus();
+        }
+      }
+    }
     if (e.key === ' ') {
       const tag = document.activeElement.tagName;
       if (tag === 'BODY' || tag === 'A') {
