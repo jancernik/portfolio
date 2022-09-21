@@ -11,7 +11,13 @@ Animate.navMarker(btn);
 btn.classList.add('active');
 window.addEventListener('load', () => {
   Style.favicon(window.matchMedia('(prefers-color-scheme: dark)'));
-  Animate.pageScroll(sections, false);
+  const offset = sections[0].getBoundingClientRect().top;
+  const scrollPos = window.scrollY;
+  const documentTop = document.documentElement.clientTop;
+  window.scrollTo({
+    top: offset + scrollPos - documentTop,
+    behavior: 'instant',
+  });
   Handle.hashCheck();
 });
 Style.homePadding();
