@@ -8,6 +8,7 @@ let tEndY = 0;
 export default function BindAllEvents() {
   document.querySelector('.hamburger-btn').addEventListener('click', () => {
     document.querySelector('nav').classList.toggle('mobile-active');
+    document.querySelector('.hamburger-btn').classList.toggle('active');
   });
 
   document.querySelectorAll('.section-btn').forEach((btn) => {

@@ -1150,9 +1150,65 @@ p a {
     .cv {
       display: none;
     }
+    a {
+      font-size: $header-icon-font-size*1.2;
+    }
     .hamburger-btn {
+      &:focus {
+        outline: none;
+      }
       margin-left: auto;
-      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: $header-icon-font-size*1.2;
+      width: $header-icon-font-size*1.2;
+      height: $header-icon-font-size*1.2;
+      background: transparent;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      .middle-line {
+        height: 3px;
+        width: $header-icon-font-size*1.2;
+        background: $primary-font-color;
+        transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      }
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        height: 3px;
+        left: 50%;
+        width: $header-icon-font-size*1.2;
+        background: $primary-font-color;
+        transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      }
+      &::before {
+        top: 0%;
+        transform: translate(-50%, 0%);
+      }
+      &::after {
+        top: 100%;
+        transform: translate(-50%, -100%);
+      }
+    }
+    .hamburger-btn.active {
+      .middle-line {
+        opacity: 0;
+      }
+      &::before,
+      &::after {
+        left: 50%;
+        top: 50%;
+      }
+      &::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+      &::after {
+        transform: translate(-50%, -50%) rotate(135deg);
+      }
     }
     nav.mobile-active {
       background: $background-color;
