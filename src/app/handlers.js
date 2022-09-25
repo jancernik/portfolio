@@ -183,7 +183,7 @@ export default class Handle {
     else if (curHash === '#contact') g.currentSection = 3;
     else {
       g.currentSection = 0;
-      window.location.hash = 'home';
+      window.history.replaceState(undefined, undefined, '#home');
     }
     const btn = document.querySelector(`nav [index='${g.currentSection}']`);
     this.changeActiveSection(btn);
