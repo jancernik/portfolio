@@ -10,6 +10,8 @@ export default class Handle {
     const clickedSection = parseInt(btn.getAttribute('index'), 10);
     if (g.scrollEnded && clickedSection !== g.currentSection) {
       document.querySelector('nav').classList.remove('mobile-active');
+      document.querySelector('.hamburger-btn').classList.remove('active');
+
       this.changeActiveSection(btn);
       g.lastSection = g.currentSection;
       g.currentSection = clickedSection;

@@ -115,7 +115,6 @@ header {
         cursor: pointer;
       }
       .active {
-        color: $primary-font-color;
         color: $background-color;
         transition: 200ms ease-in-out 1000ms;
       }
@@ -1151,7 +1150,7 @@ p a {
       display: none;
     }
     a {
-      font-size: $header-icon-font-size*1.2;
+      font-size: $header-icon-font-size * 1.2;
     }
     .hamburger-btn {
       &:focus {
@@ -1161,18 +1160,18 @@ p a {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: $header-icon-font-size*1.2;
-      width: $header-icon-font-size*1.2;
-      height: $header-icon-font-size*1.2;
+      font-size: $header-icon-font-size * 1.2;
+      width: $header-icon-font-size * 1.2;
+      height: $header-icon-font-size * 1.2;
       background: transparent;
-      color: #fff;
+      color: $secondary-font-color;
       border: none;
       cursor: pointer;
       position: relative;
       .middle-line {
         height: 3px;
-        width: $header-icon-font-size*1.2;
-        background: $primary-font-color;
+        width: $header-icon-font-size * 1.2;
+        background: $secondary-font-color;
         transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
       }
       &::before,
@@ -1181,8 +1180,8 @@ p a {
         position: absolute;
         height: 3px;
         left: 50%;
-        width: $header-icon-font-size*1.2;
-        background: $primary-font-color;
+        width: $header-icon-font-size * 1.2;
+        background: $secondary-font-color;
         transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
       }
       &::before {
@@ -1211,19 +1210,34 @@ p a {
       }
     }
     nav.mobile-active {
-      background: $background-color;
+      .marker {
+        display: none;
+      }
+      background:$background-color;
       width: 100%;
-      display: block;
+      display: flex;
       position: absolute;
       margin: 0;
       right: 0;
-      top: 100%;
+      top: 0;
+      justify-content: center;
+      align-items: center;
+      // padding-bottom: $header-height;
+      height: 100vh;
+      z-index: -1;
       ul {
         flex-direction: column;
         align-items: center;
+        gap: 2rem;
         button,
         li {
-          width: 100%;
+          font-size: 1.8rem;
+          width: fit-content;
+        }
+        .active {
+          color: $background-color;
+          background: $primary-accent-color;
+          transition: 200ms ease-in-out;
         }
       }
     }
